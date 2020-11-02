@@ -1,11 +1,11 @@
 const router   = require("express").Router();
 /**************
-	CONTROLLERS
+ CONTROLLERS
 *****************/
 const authCtrl = require('../controllers/auth.controller');
 
 /***********
-	AUTH
+ AUTH
 *****************/
 router.get('/',authCtrl.login,(req,res) =>{
     res.json('Yellow');

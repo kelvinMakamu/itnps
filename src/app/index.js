@@ -4,7 +4,7 @@ const morgan      = require('morgan');
 const helmet      = require('helmet');
 const cors        = require('cors');
 const CONFIG      = require('../configs/config');
-require('../models/connect');
+const CONNECT     = require('../models/connect');
 const router      = require("../routes/app.routes");
 
 const middlewares = [
