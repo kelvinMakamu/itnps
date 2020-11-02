@@ -15,6 +15,12 @@ const ManagerSchema = new Schema({
     },
 }, { timestamps: true });
 
+ManagerSchema.method("toJSON", function() {
+    const { __v, _id, ...object } = this.toObject();
+    object.id = _id;
+    return object;
+});
+
 let Manager = mongoose.model('Manager',ManagerSchema);
 
 module.exports = Manager;
