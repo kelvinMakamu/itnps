@@ -1,4 +1,4 @@
-const { uuid } = require('uuidv4');
+const { v4: uuidv4 } = require('uuid');
 
 const formatDate    = (date) => {
 	return new Date(date).toISOString().replace(/T/,' ').replace(/\..+/, '');
@@ -25,7 +25,7 @@ const calculateNPS = (resolution, satisfaction) => {
 
 const createResponseBody = (statusCode, statusDesc, data, type) => {
     const header = {
-        requestRefId: uuid(),
+        requestRefId: uuidv4(),
         responseCode: statusCode,
         responseDesc: statusDesc,
         timestamp: formatDate(new Date())
