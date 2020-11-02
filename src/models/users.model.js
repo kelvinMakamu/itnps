@@ -24,6 +24,7 @@ const UserSchema = new Schema({
         minlength: 4,
         trim: true,
         index: true,
+        unique: 'Username already exists',
         required: 'Please provide the username'
     },
     email : {
@@ -31,7 +32,9 @@ const UserSchema = new Schema({
         trim: true,
         lowercase: true,
         index: true,
-        required: 'Please provide user email address'
+        unique: 'Email already exists',
+        match: [/.+\@.+\..+/, 'Please fill a valid email address'],
+        required: 'Email is required'
     },
     level : {
         type: Number,
