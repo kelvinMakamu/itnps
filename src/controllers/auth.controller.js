@@ -23,7 +23,7 @@ const registerUser = (req, res) => {
     !req.body.password;
 
   if (invalid) {
-    let msg = "Please provide all details";
+    let msg = "Please provide correct details";
     res.status(401).json(createResponseBody(1001, msg, [], 1));
     return;
   }
