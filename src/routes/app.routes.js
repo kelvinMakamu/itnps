@@ -36,8 +36,7 @@ router.get("/users/userLevel/:level", userCtrl.findUserByLevel);
 router.get("/responses", resCtrl.findResponses);
 router.post("/responses", resCtrl.createResponse);
 router.get("/responses/:id", resCtrl.findResponseById);
-router.post("/responses/:id", resCtrl.updateResponseById);
-router.post("/responses/users/:userId", resCtrl.getUserResponses);
+router.get("/responses/users/:userId", resCtrl.getUserResponses);
 router.post("/responses/dashboard/:userId", resCtrl.getDashboardStats);
 
 module.exports  = router;
