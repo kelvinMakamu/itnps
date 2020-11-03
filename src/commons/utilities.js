@@ -23,6 +23,24 @@ const calculateNPS = (resolution, satisfaction) => {
     return nps.toFixed(2);
 }
 
+const determineUserLevel = (level) =>{
+    authLevel = '';
+    switch(level){
+        case 0:
+        authLevel = 'Admin';
+        break;
+
+        case 1:
+        authLevel = 'Manager';
+        break;
+
+        case 2:
+        authLevel = 'Agent';
+        break;
+    };
+    return authLevel;
+}
+
 const createResponseBody = (statusCode, statusDesc, data, type) => {
     const header = {
         requestRefId: uuidv4(),
@@ -37,5 +55,6 @@ module.exports = {
     formatDate,
     calculateNPS,
     formatDatabaseDate,
-    createResponseBody
+    createResponseBody,
+    determineUserLevel
 }

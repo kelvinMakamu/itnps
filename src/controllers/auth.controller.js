@@ -68,6 +68,14 @@ const login = (req,res) => {
 	});
 }
 
+const resetPassword = (req, res) =>{
+
+}
+
+const logoutUser    = (req, res) =>{
+
+}
+
 const isValidToken = (req,res,next) => {
 	if(req.headers['authorization']){
 		try{
@@ -98,5 +106,7 @@ module.exports = {
 	login,
 	isValidToken,
 	registerUser,
-	loginRequired
+	loginRequired,
+	resetPassword,
+	logoutUser
 }

@@ -66,3 +66,11 @@ exports.findUserByLevel = (req,res) => {
 		}
 	});
 };
+
+exports.updateUserById = (req,res) => {
+
+};
+
+exports.getUserAgentsById = (req, res) => {
+
+};

@@ -4,6 +4,10 @@ const {
     createResponseBody
 }               = require("../commons/utilities");
 
+const {
+    getUserDashboardStats
+}               = require('../services/dashboard.service');
+
 exports.createResponse = (req, res) => {
     const invalid = !req.body.agent_id || !req.body.resolution ||
 	 !req.body.satisfaction || !req.body.medium || !req.body.verbatim;
@@ -45,4 +49,24 @@ exports.findResponseById = (req,res) => {
 	});
 };
 
+exports.findResponses = (req,res) => {
 
+};
+
+exports.updateResponseById = (req, res) => {
+
+};
+//{medium,startDate,endDate}
+exports.getUserResponses = (req, res) => {
+
+};
+//{medium,startDate,endDate}
+exports.getDashboardStats = async (req, res) => {
+    const userID    = req.params.userId;
+    const medium    = req.body.medium || 125;
+    const startDate = req.body.startDate;
+    const endDate   = req.body.endDate;
+    const stats = await getUserDashboardStats(userID,medium,startDate,endDate);
+    let msg = "Stats loaded successfully.";
+    res.status(200).json(createResponseBody(1000,msg,stats,0));
+};
