@@ -3,6 +3,7 @@ const {
     determineUserLevel
 }               = require('../commons/utilities');
 const User      = require('../models/users.model');
+const Manager   = require('../models/managers.model');
 const Response  = require('../models/responses.model');
 
 const getLoggedUserDetails = async (userID) => {
@@ -44,9 +45,16 @@ const getUserRawResponses = async (userID) => {
             break;
     
             case 1:
-            condition = {
-                agent_id : userID
-            };
+            const manager = await Manager.find({ manager_id: userID},'agent_id');
+            if(manager){
+                condition = {
+                    $in: [ agent_id, [ userID, ...manager ] ]
+                };
+            }else{
+                condition = {
+                    agent_id : userID
+                };
+            }
             break;
     
             case 2:
@@ -92,14 +100,26 @@ const getAggreedResolved  = async(userID,medium,startDate,endDate) => {
             break;
     
             case 1:
-            condition = {
-                agent_id : userID,
-                createdAt: {
-                    $gte: new Date(new Date(startDate).setHours(00, 00, 00)),
-                    $lt: new Date(new Date(endDate).setHours(23, 59, 59))
-                },
-                "satisfaction": { $gt: 7 }
-            };
+            const manager = await Manager.find({ manager_id: userID},'agent_id');
+            if(manager){
+                condition = {
+                    $in: [ agent_id, [ userID, ...manager ] ],
+                    createdAt: {
+                        $gte: new Date(new Date(startDate).setHours(00, 00, 00)),
+                        $lt: new Date(new Date(endDate).setHours(23, 59, 59))
+                    },
+                    "satisfaction": { $gt: 7 }
+                };
+            }else{
+                condition = {
+                    agent_id : userID,
+                    createdAt: {
+                        $gte: new Date(new Date(startDate).setHours(00, 00, 00)),
+                        $lt: new Date(new Date(endDate).setHours(23, 59, 59))
+                    },
+                    "satisfaction": { $gt: 7 }
+                };
+            }
             break;
     
             case 2:
@@ -130,20 +150,32 @@ const getDisputedResolved = async(userID,medium,startDate,endDate) => {
                 createdAt: {
                     $gte: new Date(new Date(startDate).setHours(00, 00, 00)),
                     $lt: new Date(new Date(endDate).setHours(23, 59, 59))
-                    },
-                    "satisfaction": { $lt: 7 }
+                },
+                "satisfaction": { $lt: 7 }
             };
             break;
     
             case 1:
-            condition = {
-                agent_id : userID,
-                createdAt: {
-                    $gte: new Date(new Date(startDate).setHours(00, 00, 00)),
-                    $lt: new Date(new Date(endDate).setHours(23, 59, 59))
-                },
-                "satisfaction": { $lt: 7 }
-            };
+            const manager = await Manager.find({ manager_id: userID},'agent_id');
+            if(manager){
+                condition = {
+                    $in: [ agent_id, [ userID, ...manager ] ],
+                    createdAt: {
+                        $gte: new Date(new Date(startDate).setHours(00, 00, 00)),
+                        $lt: new Date(new Date(endDate).setHours(23, 59, 59))
+                    },
+                    "satisfaction": { $lt: 7 }
+                };
+            }else{
+                condition = {
+                    agent_id : userID,
+                    createdAt: {
+                        $gte: new Date(new Date(startDate).setHours(00, 00, 00)),
+                        $lt: new Date(new Date(endDate).setHours(23, 59, 59))
+                    },
+                    "satisfaction": { $lt: 7 }
+                };
+            }
             break;
     
             case 2:
@@ -180,14 +212,26 @@ const getDetractors = async (userID,medium,startDate,endDate) => {
             break;
     
             case 1:
-            condition = {
-                agent_id : userID,
-                createdAt: {
-                    $gte: new Date(new Date(startDate).setHours(00, 00, 00)),
-                    $lt: new Date(new Date(endDate).setHours(23, 59, 59))
-                },
-                "nps_score": { $lt: 7 }
-            };
+            const manager = await Manager.find({ manager_id: userID},'agent_id');
+            if(manager){
+                condition = {
+                    $in: [ agent_id, [ userID, ...manager ] ],
+                    createdAt: {
+                        $gte: new Date(new Date(startDate).setHours(00, 00, 00)),
+                        $lt: new Date(new Date(endDate).setHours(23, 59, 59))
+                    },
+                    "nps_score": { $lt: 7 }
+                };
+            }else{
+                condition = {
+                    agent_id : userID,
+                    createdAt: {
+                        $gte: new Date(new Date(startDate).setHours(00, 00, 00)),
+                        $lt: new Date(new Date(endDate).setHours(23, 59, 59))
+                    },
+                    "nps_score": { $lt: 7 }
+                };
+            }
             break;
     
             case 2:
@@ -220,20 +264,32 @@ const getPromoters  = async (userID,medium,startDate,endDate) => {
                 createdAt: {
                     $gte: new Date(new Date(startDate).setHours(00, 00, 00)),
                     $lt: new Date(new Date(endDate).setHours(23, 59, 59))
-                    },
-                    "nps_score": { $gt: 9 }
+                },
+                "nps_score": { $gt: 9 }
             };
             break;
     
             case 1:
-            condition = {
-                agent_id : userID,
-                createdAt: {
-                    $gte: new Date(new Date(startDate).setHours(00, 00, 00)),
-                    $lt: new Date(new Date(endDate).setHours(23, 59, 59))
+            const manager = await Manager.find({ manager_id: userID},'agent_id');
+            if(manager){
+                condition = {
+                    $in: [ agent_id, [ userID, ...manager ] ],
+                    createdAt: {
+                        $gte: new Date(new Date(startDate).setHours(00, 00, 00)),
+                        $lt: new Date(new Date(endDate).setHours(23, 59, 59))
                     },
                     "nps_score": { $gt: 9 }
-            };
+                };
+            }else{
+                condition = {
+                    agent_id : userID,
+                    createdAt: {
+                        $gte: new Date(new Date(startDate).setHours(00, 00, 00)),
+                        $lt: new Date(new Date(endDate).setHours(23, 59, 59))
+                    },
+                    "nps_score": { $gt: 9 }
+                };
+            }
             break;
     
             case 2:
@@ -242,8 +298,8 @@ const getPromoters  = async (userID,medium,startDate,endDate) => {
                 createdAt: {
                     $gte: new Date(new Date(startDate).setHours(00, 00, 00)),
                     $lt: new Date(new Date(endDate).setHours(23, 59, 59))
-                    },
-                    "nps_score": { $gt: 9 }
+                },
+                "nps_score": { $gt: 9 }
             };
             break;
         }
@@ -272,13 +328,24 @@ const getTotalResponses  = async (userID,medium,startDate,endDate) => {
             break;
     
             case 1:
-            condition = {
-                agent_id : userID,
-                createdAt: {
-                    $gte: new Date(new Date(startDate).setHours(00, 00, 00)),
-                    $lt: new Date(new Date(endDate).setHours(23, 59, 59))
-                }
-            };
+            const manager = await Manager.find({ manager_id: userID},'agent_id');
+            if(manager){
+                condition = {
+                    $in: [ agent_id, [ userID, ...manager ] ],
+                    createdAt: {
+                        $gte: new Date(new Date(startDate).setHours(00, 00, 00)),
+                        $lt: new Date(new Date(endDate).setHours(23, 59, 59))
+                    }
+                };
+            }else{
+                condition = {
+                    agent_id : userID,
+                    createdAt: {
+                        $gte: new Date(new Date(startDate).setHours(00, 00, 00)),
+                        $lt: new Date(new Date(endDate).setHours(23, 59, 59))
+                    }
+                };
+            }
             break;
     
             case 2:
@@ -332,7 +399,6 @@ const getUserDashboardStats   = async (userID,medium,startDate,endDate) => {
         return 1005;
     }
 };
-
 
 module.exports = {
     getUserRawResponses,
