@@ -1,4 +1,3 @@
-const CONFIG    = require("../configs/config");
 const {
     determineUserLevel
 }               = require('../commons/utilities');

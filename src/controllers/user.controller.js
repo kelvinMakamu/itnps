@@ -5,6 +5,10 @@ const {
     createResponseBody
 }               = require("../commons/utilities");
 
+const {
+      assignManagerAnAgent
+}               = require("../services/user.service");
+
 exports.findUsers = (req,res) =>{
     User.find({},CONFIG.COLS_USER,(err,user) => {
 		if(err){
@@ -74,3 +78,50 @@ exports.updateUserById = (req,res) => {
 exports.getUserAgentsById = (req, res) => {
 
 };
+
+exports.assignAgentsToManager = async (req,res) => {
+
+      const invalid = !req.body.managerId || !req.body.agentId;
+
+      if(invalid){
+            let msg = "Please provide manager and agent IDs";
+            res.status(401).json(createResponseBody(1001,msg,[],1));
+            return;
+      }
+
+      const assigned   = await assignManagerAnAgent(req.body.managerId, req.body.agentId);
+      switch(assigned){
+            case 1000:
+            res.status(200).json(createResponseBody(1000,'Agent successfully assigned to the Manager',[],1));
+            break;
+
+            case 1003:
+            res.status(401).json(createResponseBody(1003,'The agent is already assigned to the same Manager',[],1));
+            break;
+
+            case 1005:
+            res.status(401).json(createResponseBody(1005,'Manager records not found',[],1));
+            break;
+
+            case 1007:
+            res.status(401).json(createResponseBody(1007,'Assignments only allowed between managers and agents',[],1));
+            break;
+
+            case 1009:
+            res.status(401).json(createResponseBody(1009,'The agent is already assigned to a different manager.',[],1));
+            break;
+
+            case 1011:
+            res.status(401).json(createResponseBody(1011,'The agent does not exist.',[],1));
+            break;
+
+            case 1013:
+            res.status(401).json(createResponseBody(1013,'Only agents can be assigned managers.',[],1));
+            break;
+
+            case 1015:
+            res.status(401).json(createResponseBody(1015,'An error occurred while tring to assign the agent.',[],1));
+            break;
+      }
+
+}
