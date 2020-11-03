@@ -43,14 +43,14 @@ exports.findUserById = (req,res) => {
 
 exports.findUserByLevel = (req,res) => {
     
-    if(!CONFIG.ALLOWED_LEVELS.includes(req.body.level)){
-        let msg = `${req.body.level} is an invalid authorization level`;
+    if(!CONFIG.ALLOWED_LEVELS.includes(parseInt(req.params.level))){
+        let msg = `${req.params.level} is an invalid authorization level`;
         res.status(400).json(createResponseBody(1001,msg,[],1));
         return;
     }
 
     User.find({
-		level: req.body.level
+		level: req.params.level
 	},CONFIG.COLS_USER,(err,user) => {
 		if(err){
             res.status(400).json(createResponseBody(1001,err,[],1));	
