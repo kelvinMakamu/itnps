@@ -7,6 +7,9 @@ const router = require("express").Router();
 const authCtrl = require("../controllers/auth.controller");
 const userCtrl = require("../controllers/user.controller");
 const authorized = [authCtrl.loginRequired, authCtrl.isValidToken];
+router.get('/', (req, res)=>{
+    res.send("welcome")
+})
 /*****
  *
  * AUTH

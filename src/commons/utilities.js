@@ -16,10 +16,21 @@ const formatDatabaseDate = (date) => {
   return [year, month, day].join("-");
 };
 
-const calculateNPS = (resolution, satisfaction) => {
-  let nps = (resolution + satisfaction) / 2;
-  return nps.toFixed(2);
-};
+// const calculateNPS = (resolution, satisfaction) => {
+//   let nps = (resolution + satisfaction) / 2;
+//   return nps.toFixed(2);
+// };
+const calculateNPS =(scores) =>{
+  var promoters = 0;
+  var detractors = 0;
+  
+  for (var i=0, l=scores.length; i<l; i++) {
+    if (scores[i] >= 9) promoters++;
+    if (scores[i] <= 6) detractors++;
+  }
+  
+  return Math.round(((promoters / l) - (detractors / l)) * 100);
+}
 
 const createResponseBody = (statusCode, statusDesc, data, type) => {
   const header = {
