@@ -152,5 +152,4 @@ exports.assignAgentsToManager = async (req,res) => {
             res.status(401).json(createResponseBody(1015,'An error occurred while tring to assign the agent.',[],1));
             break;
       }
-
 }
