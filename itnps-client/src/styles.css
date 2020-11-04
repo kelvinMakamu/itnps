@@ -1,1 +1,51 @@
 /* You can add global styles to this file, and also import other style files */
+@import "~bootstrap/dist/css/bootstrap.css";
+body, html {
+    margin: 0;
+    height: 100%;
+    overflow: hidden;
+    font-family: Montserrat;
+}
+
+input:focus, textarea:focus, input.form-control:focus, select:focus {
+    border: 1px solid #43b02a;
+    outline:none !important;
+    outline-width: 0 !important;
+    box-shadow: none !important;
+    -moz-box-shadow: none !important;
+    -webkit-box-shadow: none !important;
+}
+
+.form-control{
+    border: solid 1px #43b02a;
+}
+
+::-webkit-input-placeholder{ 
+ color: #43b02a !important;
+ font-weight: lighter;
+}
+
+:-ms-input-placeholder{ 
+ color: #43b02a !important;
+ font-weight: lighter;
+}
+
+::placeholder{
+    color: #43b02a !important;
+    font-weight: lighter;
+}
+
+input:focus::placeholder {
+    color: transparent;
+}
+::-webkit-input-placeholder { opacity: 1; -webkit-transition: opacity .5s; transition: opacity .5s; }  /* Chrome <=56, Safari < 10 */
+:-moz-placeholder { opacity: 1; -moz-transition: opacity .5s; transition: opacity .5s; } /* FF 4-18 */
+::-moz-placeholder { opacity: 1; -moz-transition: opacity .5s; transition: opacity .5s; } /* FF 19-51 */
+:-ms-input-placeholder { opacity: 1; -ms-transition: opacity .5s; transition: opacity .5s; } /* IE 10+ */
+::placeholder { opacity: 1; transition: opacity .5s; } /* Modern Browsers */
+    
+*:focus::-webkit-input-placeholder { opacity: 0; } /* Chrome <=56, Safari < 10 */
+*:focus:-moz-placeholder { opacity: 0; } /* FF 4-18 */
+*:focus::-moz-placeholder { opacity: 0; } /* FF 19-50 */
+*:focus:-ms-input-placeholder { opacity: 0; } /* IE 10+ */
+*:focus::placeholder { opacity: 0; } /* Modern Browsers */
