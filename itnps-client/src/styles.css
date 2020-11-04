@@ -4,7 +4,6 @@ body, html {
     margin: 0;
     height: 100%;
     overflow: hidden;
-    font-family: Montserrat;
 }
 
 input:focus, textarea:focus, input.form-control:focus, select:focus {
