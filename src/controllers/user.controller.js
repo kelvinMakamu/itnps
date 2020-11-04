@@ -4,8 +4,8 @@ const User      = require('../models/users.model');
 const {
     createResponseBody
 }               = require("../commons/utilities");
-
 const {
+      getManagerAgents,
       assignManagerAnAgent
 }               = require("../services/user.service");
 
@@ -16,7 +16,7 @@ exports.findUsers = (req,res) =>{
             return;	
 		}
 		if(!user){
-			let msg = `No users found`;
+		let msg = `No users found`;
             res.status(401).json(createResponseBody(1001,msg,[],1));	
             return;
 		}else{
@@ -57,16 +57,16 @@ exports.findUserByLevel = (req,res) => {
 		level: req.params.level
 	},CONFIG.COLS_USER,(err,user) => {
 		if(err){
-            res.status(400).json(createResponseBody(1001,err,[],1));	
-            return;
+                  res.status(400).json(createResponseBody(1001,err,[],1));	
+                  return;
 		}
 		if(!user){
-			let msg = `No user found by the defined level ${req.params.level}`;
-            res.status(401).json(createResponseBody(1001,msg,[],1));	
-            return;
+                  let msg = `No user found by the defined level ${req.params.level}`;
+                  res.status(401).json(createResponseBody(1001,msg,[],1));	
+                  return;
 		}else{
-            let msg = "Users successfully loaded.";
-            res.status(200).json(createResponseBody(1000,msg,user,0));
+                  let msg = "Users successfully loaded.";
+                  res.status(200).json(createResponseBody(1000,msg,user,0));
 		}
 	});
 };
@@ -75,8 +75,37 @@ exports.updateUserById = (req,res) => {
 
 };
 
-exports.getUserAgentsById = (req, res) => {
+exports.getUserAgentsById = async (req, res) => {
+      const invalid = !req.params.managerId;
 
+      if(invalid){
+            let msg = "Please provide manager ID";
+            res.status(401).json(createResponseBody(1001,msg,[],1));
+            return;
+      }
+
+      const agents = await getManagerAgents(req.params.managerId);
+
+      switch(agents){
+            case 1005:
+            res.status(401).json(createResponseBody(1005,`No manager found by the id ${req.params.managerId}`,[],1));
+            return;
+            break;
+
+            case 1007:
+            res.status(401).json(createResponseBody(1007,`Only managers are the ONLY ones assigned agents`,[],1));
+            return;
+            break;
+
+            case 1009:
+            res.status(401).json(createResponseBody(1009,`No agents assigned to the manager`,[],1));
+            return;
+            break;
+
+            default:
+            res.status(200).json(createResponseBody(1000,`Agents successfully loaded`,agents,0));
+            break;
+      }
 };
 
 exports.assignAgentsToManager = async (req,res) => {

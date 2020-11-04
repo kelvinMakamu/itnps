@@ -44,10 +44,11 @@ const getUserRawResponses = async (userID) => {
             break;
     
             case 1:
-            const manager = await Manager.find({ manager_id: userID},'agent_id');
-            if(manager){
+            const managers = await Manager.find({ manager_id: userID},'agent_id');
+            let agents     = managers.map((manage) => {return manage.agent_id});
+            if(agents){
                 condition = {
-                    $in: [ agent_id, [ userID, ...manager ] ]
+                    agent_id: { $in: [ userID, ...agents ] },
                 };
             }else{
                 condition = {
@@ -99,10 +100,11 @@ const getAggreedResolved  = async(userID,medium,startDate,endDate) => {
             break;
     
             case 1:
-            const manager = await Manager.find({ manager_id: userID},'agent_id');
-            if(manager){
+            const managers = await Manager.find({ manager_id: userID},'agent_id');
+            let agents     = managers.map((manage) => {return manage.agent_id});
+            if(agents){
                 condition = {
-                    $in: [ agent_id, [ userID, ...manager ] ],
+                    agent_id: { $in: [ userID, ...agents ] },
                     createdAt: {
                         $gte: new Date(new Date(startDate).setHours(00, 00, 00)),
                         $lt: new Date(new Date(endDate).setHours(23, 59, 59))
@@ -155,10 +157,11 @@ const getDisputedResolved = async(userID,medium,startDate,endDate) => {
             break;
     
             case 1:
-            const manager = await Manager.find({ manager_id: userID},'agent_id');
-            if(manager){
+            const managers = await Manager.find({ manager_id: userID},'agent_id');
+            let agents     = managers.map((manage) => {return manage.agent_id});
+            if(agents){
                 condition = {
-                    $in: [ agent_id, [ userID, ...manager ] ],
+                    agent_id: { $in: [ userID, ...agents ] },
                     createdAt: {
                         $gte: new Date(new Date(startDate).setHours(00, 00, 00)),
                         $lt: new Date(new Date(endDate).setHours(23, 59, 59))
@@ -211,10 +214,11 @@ const getDetractors = async (userID,medium,startDate,endDate) => {
             break;
     
             case 1:
-            const manager = await Manager.find({ manager_id: userID},'agent_id');
-            if(manager){
+            const managers = await Manager.find({ manager_id: userID},'agent_id');
+            let agents     = managers.map((manage) => {return manage.agent_id});
+            if(agents){
                 condition = {
-                    $in: [ agent_id, [ userID, ...manager ] ],
+                    agent_id: { $in: [ userID, ...agents ] },
                     createdAt: {
                         $gte: new Date(new Date(startDate).setHours(00, 00, 00)),
                         $lt: new Date(new Date(endDate).setHours(23, 59, 59))
@@ -269,10 +273,11 @@ const getPromoters  = async (userID,medium,startDate,endDate) => {
             break;
     
             case 1:
-            const manager = await Manager.find({ manager_id: userID},'agent_id');
-            if(manager){
+            const managers = await Manager.find({ manager_id: userID},'agent_id');
+            let agents     = managers.map((manage) => {return manage.agent_id});
+            if(agents){
                 condition = {
-                    $in: [ agent_id, [ userID, ...manager ] ],
+                    agent_id: { $in: [ userID, ...agents ] },
                     createdAt: {
                         $gte: new Date(new Date(startDate).setHours(00, 00, 00)),
                         $lt: new Date(new Date(endDate).setHours(23, 59, 59))
@@ -327,10 +332,11 @@ const getTotalResponses  = async (userID,medium,startDate,endDate) => {
             break;
     
             case 1:
-            const manager = await Manager.find({ manager_id: userID},'agent_id');
-            if(manager){
+            const managers = await Manager.find({ manager_id: userID},'agent_id');
+            let agents     = managers.map((manage) => {return manage.agent_id});
+            if(agents){
                 condition = {
-                    $in: [ agent_id, [ userID, ...manager ] ],
+                    agent_id: { $in: [ userID, ...agents ] },
                     createdAt: {
                         $gte: new Date(new Date(startDate).setHours(00, 00, 00)),
                         $lt: new Date(new Date(endDate).setHours(23, 59, 59))

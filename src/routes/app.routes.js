@@ -25,7 +25,7 @@ router.post("/auth/logout", authCtrl.logoutUser);
 router.get("/users", userCtrl.findUsers);
 router.get("/users/:id", userCtrl.findUserById);
 router.post("/users/:id",userCtrl.updateUserById);
-router.get("/users/:id/agents",userCtrl.getUserAgentsById);
+router.get("/users/:managerId/agents",userCtrl.getUserAgentsById);
 router.get("/users/userLevel/:level", userCtrl.findUserByLevel);
 router.post("/users/assign/manager", userCtrl.assignAgentsToManager);
 
