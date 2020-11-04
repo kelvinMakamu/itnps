@@ -74,35 +74,45 @@ const login = (req, res) => {
   );
 };
 
-const isValidToken = (req, res, next) => {
-  if (req.headers["authorization"]) {
-    try {
-      let authorization = req.headers["authorization"].split(" ");
-      if (authorization[0] !== "Bearer") {
-        req.user = undefined;
-        next();
-      } else {
-        jwt.verify(authorization[1], CONFIG.SECRET, (err, decode) => {
-          if (err) {
-            req.user = undefined;
-          }
-          req.user = decode;
-          next();
-        });
-      }
-    } catch (err) {
-      req.user = undefined;
-      next();
-    }
-  } else {
-    req.user = undefined;
-    next();
-  }
+const resetPassword = (req, res) =>{
+
+}
+
+const logoutUser    = (req, res) =>{
+
+}
+
+const isValidToken = (req,res,next) => {
+	if(req.headers['authorization']){
+		try{
+			let authorization = req.headers['authorization'].split(' ');
+			if(authorization[0] !== 'Bearer') {
+				req.user = undefined;
+				next();
+			}else{
+				jwt.verify(authorization[1],CONFIG.SECRET,(err,decode) =>{
+					if(err){
+						req.user = undefined;
+					}
+					req.user = decode;
+					next();
+				});
+			}
+		}catch(err){
+			req.user = undefined;
+			next();
+		}
+	}else{
+			req.user = undefined;
+			next();
+	}
 };
 
 module.exports = {
-  login,
-  isValidToken,
-  registerUser,
-  loginRequired,
-};
+	login,
+	isValidToken,
+	registerUser,
+	loginRequired,
+	resetPassword,
+	logoutUser
+}

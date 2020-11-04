@@ -16,20 +16,27 @@ const formatDatabaseDate = (date) => {
   return [year, month, day].join("-");
 };
 
-// const calculateNPS = (resolution, satisfaction) => {
-//   let nps = (resolution + satisfaction) / 2;
-//   return nps.toFixed(2);
-// };
-const calculateNPS =(scores) =>{
-  var promoters = 0;
-  var detractors = 0;
-  
-  for (var i=0, l=scores.length; i<l; i++) {
-    if (scores[i] >= 9) promoters++;
-    if (scores[i] <= 6) detractors++;
-  }
-  
-  return Math.round(((promoters / l) - (detractors / l)) * 100);
+const calculateNPS = (resolution, satisfaction) => {
+  let nps = (resolution + satisfaction) / 2;
+  return nps.toFixed(2);
+};
+
+const determineUserLevel = (level) =>{
+    authLevel = '';
+    switch(level){
+        case 0:
+        authLevel = 'Admin';
+        break;
+
+        case 1:
+        authLevel = 'Manager';
+        break;
+
+        case 2:
+        authLevel = 'Agent';
+        break;
+    };
+    return authLevel;
 }
 
 const createResponseBody = (statusCode, statusDesc, data, type) => {
@@ -42,9 +49,10 @@ const createResponseBody = (statusCode, statusDesc, data, type) => {
   return type === 0 ? { header, body: data } : { header };
 };
 
-module.exports = {
-  formatDate,
-  calculateNPS,
-  formatDatabaseDate,
-  createResponseBody,
-};
+module.exports = { 
+    formatDate,
+    calculateNPS,
+    formatDatabaseDate,
+    createResponseBody,
+    determineUserLevel
+}
