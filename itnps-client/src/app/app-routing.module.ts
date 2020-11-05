@@ -4,8 +4,10 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { ReportsComponent } from './reports/reports.component';
 import { ResponsesComponent } from './responses/responses.component';
 import { HelpComponent } from './help/help.component';
+import { AuthComponent } from './auth/auth.component';
 
 const routes: Routes = [
+  { path: 'login',      component: AuthComponent },
   { path: 'dashboard',  component: DashboardComponent },
   { path: 'reports',    component: ReportsComponent },
   { path: 'responses',  component: ResponsesComponent },
