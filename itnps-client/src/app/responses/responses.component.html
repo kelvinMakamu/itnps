@@ -1,46 +1,31 @@
-<<<<<<< HEAD
-<!-- <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">Responses
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav">
-          <li class="nav-item">
-            <a class="nav-link inactive">TimeStamp<span class="listHeader"></span></a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link inactive">Staff Username<span class="listHeader"></span></a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link inactive">Mobile/Extension No<span class="listHeader"></span></a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link inactive">NPS Score<span class="listHeader"></span></a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link inactive">Resolution<span class="listHeader"></span></a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link inactive">Verbatim<span class="listHeader"></span></a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link inactive">Satistaftion<span class="listHeader"></span></a>
-          </li>
-  
-  
-        </ul>
-      </div>
-    </nav>
-  </body> -->
-=======
 <app-nav-bar></app-nav-bar>
 <div class="screen">
-  <div class="container">
-      <div class="row">
-        <div class="card sidemenu col-md-2 col-lg-2 col-sm-12">
-          <app-side-bar [fullName]='userFullName' [authLevel]='currentLevel'></app-side-bar>
+    <div class="container">
+        <div class="row">
+            <div class="card sidemenu col-md-2 col-lg-2 col-sm-12">
+                <app-side-bar [fullName]='userFullName' [authLevel]='currentLevel'></app-side-bar>
+            </div>
+            <!--- START CONTENT HERE -->
+
+            <div class="col-md-10 col-lg-10 col-sm-12">
+                <div class="card">
+                    <h4>Responses</h4>
+                    <table>
+                        <tr>
+                            <th>Timestamp</th>
+                            <th>Staff username</th>
+                            <th>Mobile/Extension No</th>
+                            <th>NPS Score</th>
+                            <th>Resolution</th>
+                            <th> Verbatim</th>
+                            <th>Satisfaction</th>
+                        </tr>
+                    </table>
+
+                </div>
+            </div>
+
+
+            <!-- END CONTENT HERE -->
         </div>
-        <!--- START CONTENT HERE -->
-          <h4>Response Content Here</h4>
-        <!-- END CONTENT HERE -->
-  </div>
-</div>
->>>>>>> origin
+    </div>

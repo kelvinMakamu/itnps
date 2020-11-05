@@ -1,9 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-<<<<<<< HEAD
-import { AppRoutingModule } from '../app-routing-module';
-=======
+import { Component, OnInit, Output } from '@angular/core';
 import { UsersService } from '../services/users.service';
->>>>>>> origin
 
 @Component({
   selector: 'app-responses',
@@ -12,11 +8,6 @@ import { UsersService } from '../services/users.service';
 })
 export class ResponsesComponent implements OnInit {
 
-<<<<<<< HEAD
-  constructor() { }
-
-  ngOnInit(): void {
-=======
   userFullName  : string;
   currentLevel  : string;
 
@@ -25,7 +16,6 @@ export class ResponsesComponent implements OnInit {
   ngOnInit(): void {
       this.userFullName   = this.userService.getUserFullName();
       this.currentLevel   = this.userService.getUserAuthLevel();
->>>>>>> origin
   }
 
 }

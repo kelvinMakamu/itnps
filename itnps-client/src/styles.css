@@ -1,13 +1,4 @@
 /* You can add global styles to this file, and also import other style files */
-<<<<<<< HEAD
-/* .ul{
-    display: inline;
-    list-style-type: none;
-    padding-right: 20px;
-    float: left;
-    color: blue;
-  } */
-=======
 @import "~bootstrap/dist/css/bootstrap.css";
 body, html {
     margin: 0;
@@ -148,4 +139,10 @@ input:focus::placeholder {
 .sidemenu{
     height: 370px !important;
 }
->>>>>>> origin
+
+
+
+/* Responses Styles */
+th {
+    text-align: left;
+  }

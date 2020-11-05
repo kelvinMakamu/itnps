@@ -1,24 +1,9 @@
+
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
-
-import { AppRoutingModule } from './app-routing-module';
 import { AppComponent } from './app.component';
-<<<<<<< HEAD
-import { ResponsesComponent } from './responses/responses.component';
 
-@NgModule({
-  declarations: [
-   
-  ResponsesComponent,
-],
-
-
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    
-=======
 import { AppRoutingModule } from './app-routing.module';
 import { AuthComponent } from './auth/auth.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
@@ -45,7 +30,6 @@ import { HelpComponent } from './help/help.component';
     BrowserModule,
     FormsModule,
     AppRoutingModule
->>>>>>> origin
   ],
   providers: [],
   bootstrap: [AppComponent]
