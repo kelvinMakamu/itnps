@@ -26,6 +26,15 @@
                     <div class="col-md-2 col-lg-2 col-sm-12">
                       <input type="button" class="btn btn-default btn-block" value="Clear">
                     </div>
+                    <div class="col-md-4 col-lg-4 col-sm-12">
+                      <a class="export-report" (click)='exportResponse()'>
+                        <p>
+                          <i class="fa fa-cloud-download" aria-hidden="true"></i>&nbsp; 
+                          <span>Export Report</span>&nbsp;
+                          <i class="fa fa-angle-down" aria-hidden="true"></i> 
+                        </p>
+                      </a>
+                    </div>
                   </div>
                 </form>
               </div>
@@ -82,7 +91,14 @@
           </div>
   
           <div class="card tnps-trend-container">
-            <app-tnps-trends></app-tnps-trends>
+            <div class="chart-wrapper">
+                <canvas baseChart 
+                    [datasets]="lineChartData" 
+                    [labels]="lineChartLabels" 
+                    [colors]="lineChartColors" 
+                    [chartType]="lineChartType" >
+                </canvas>
+            </div>
           </div>
           <!-- END CONTENT HERE -->
   </div>

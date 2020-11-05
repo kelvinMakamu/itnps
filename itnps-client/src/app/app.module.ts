@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
+import { ChartsModule } from 'ng2-charts';
 import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
@@ -28,6 +29,7 @@ import { HelpComponent } from './help/help.component';
   imports: [
     BrowserModule,
     FormsModule,
+    ChartsModule,
     AppRoutingModule
   ],
   providers: [],
