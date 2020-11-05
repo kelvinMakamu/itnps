@@ -1,22 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-<<<<<<< HEAD
-import { AppRoutingModule } from '../app-routing-module';
-=======
 import { UsersService } from '../services/users.service';
->>>>>>> origin
 
 @Component({
-  selector: 'app-responses',
-  templateUrl: './responses.component.html',
-  styleUrls: ['./responses.component.css']
+  selector: 'app-reports',
+  templateUrl: './reports.component.html',
+  styleUrls: ['./reports.component.css']
 })
-export class ResponsesComponent implements OnInit {
+export class ReportsComponent implements OnInit {
 
-<<<<<<< HEAD
-  constructor() { }
-
-  ngOnInit(): void {
-=======
   userFullName  : string;
   currentLevel  : string;
 
@@ -25,7 +16,6 @@ export class ResponsesComponent implements OnInit {
   ngOnInit(): void {
       this.userFullName   = this.userService.getUserFullName();
       this.currentLevel   = this.userService.getUserAuthLevel();
->>>>>>> origin
   }
 
 }
