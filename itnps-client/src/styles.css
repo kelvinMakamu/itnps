@@ -139,3 +139,10 @@ input:focus::placeholder {
 .sidemenu{
     height: 370px !important;
 }
+
+
+
+/* Responses Styles */
+th {
+    text-align: left;
+  }
