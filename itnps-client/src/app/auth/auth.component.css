@@ -6,7 +6,7 @@
     padding: 15% 36% 25% 36%;
 }
 
-.Rectangle-582 {
+.auth-card{
     width: 372px;
     height: 375px;
     border-radius: 10px;
@@ -14,7 +14,7 @@
     background-color: #ffffff;
 }
 
-.Welcome-to-Safaricom-I-TNPS {
+.auth-project{
     font-size: 18px;
     font-stretch: normal;
     font-weight: normal;
@@ -23,7 +23,7 @@
     color: #000000;
 }
   
-.text-style-1 {
+.auth-project-name{
     color: #43b02a;
     font-size: 18px;
     font-weight: bold;

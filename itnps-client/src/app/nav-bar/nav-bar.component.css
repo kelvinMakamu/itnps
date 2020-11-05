@@ -10,18 +10,14 @@ background-color: #ffffff;
 }
 
 .tnps_name{
-width: 133px;
-height: 18px;
-font-size: 14px;
-font-weight: 400;
-font-stretch: normal;
-font-style: normal;
-line-height: 1.71;
-letter-spacing: normal;
-text-align: left;
-color: #001737;
-}
-
-.bxs{
-box-shadow: 0 2px 4px 0 rgbargba(97, 91, 91, 0.2)
+  width: 133px;
+  height: 18px;
+  font-size: 14px;
+  font-weight: bold;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.71;
+  letter-spacing: normal;
+  text-align: left;
+  color: #001737;
 }
