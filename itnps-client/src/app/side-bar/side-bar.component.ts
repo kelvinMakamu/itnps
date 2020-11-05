@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
   selector: 'app-side-bar',
@@ -7,6 +7,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SideBarComponent implements OnInit {
 
+  @Input() fullName: string;
+  @Input() authLevel: string;
+  
   constructor() { }
 
   ngOnInit(): void {
