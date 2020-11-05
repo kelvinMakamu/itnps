@@ -13,6 +13,7 @@ import { SideBarComponent } from './side-bar/side-bar.component';
 import { ReportsComponent } from './reports/reports.component';
 import { ResponsesComponent } from './responses/responses.component';
 import { HelpComponent } from './help/help.component';
+import { ResponsesService } from './services/responses.service';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,7 @@ import { HelpComponent } from './help/help.component';
     FormsModule,
     AppRoutingModule
   ],
-  providers: [],
+  providers: [ResponsesService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
