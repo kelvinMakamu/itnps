@@ -38,7 +38,7 @@ export class DashboardComponent implements OnInit {
   
   ngOnInit(): void {
     this.userId    = this.tokenStorageService.getUser().id;
-    this.startDate = '2020-01-01';
+    this.startDate = '2020-11-09';
     this.endDate   = '2020-11-30';
     this.dashboardService.getDashboardStats(this.userId,this.startDate,this.endDate).subscribe((data)=>{
       this.dashboardStats =  data.body.scores;
