@@ -4,40 +4,40 @@ const router   = require("express").Router();
  * CTRLS
  *
 **********/
-const authCtrl   = require('../controllers/auth.controller');
-const userCtrl   = require('../controllers/user.controller');
-const resCtrl    = require('../controllers/response.controller');
-const authorized = [ authCtrl.loginRequired, authCtrl.isValidToken ];
+const authCtrl      = require('../controllers/auth.controller');
+const userCtrl      = require('../controllers/user.controller');
+const resCtrl       = require('../controllers/response.controller');
+const authorized    = [ authCtrl.validateToken ];
+const authenticated = [ authCtrl.loginRequired ]; 
 /*****
  * 
  * AUTH
  *
 ********/
 router.post("/auth/login", authCtrl.login);
-router.post("/auth/register", authCtrl.registerUser);
-router.post("/auth/reset", authCtrl.resetPassword);
-router.post("/auth/logout", authCtrl.logoutUser);
+router.post("/auth/register", authorized, authCtrl.registerUser);
+//router.post("/auth/reset", authorized, authCtrl.resetPassword);
 /******
  * 
  * USERS
  *
 ********/
-router.get("/users", userCtrl.findUsers);
-router.get("/users/:id", userCtrl.findUserById);
-router.post("/users/:id",userCtrl.updateUserById);
-router.get("/users/:managerId/agents",userCtrl.getUserAgentsById);
-router.get("/users/userLevel/:level", userCtrl.findUserByLevel);
-router.post("/users/assign/manager", userCtrl.assignAgentsToManager);
+router.get("/users", authorized, userCtrl.findUsers);
+router.get("/users/:id", authorized, userCtrl.findUserById);
+router.post("/users/:id", authorized, userCtrl.updateUserById);
+router.get("/users/:managerId/agents", authorized, userCtrl.getUserAgentsById);
+router.get("/users/userLevel/:level", authorized, userCtrl.findUserByLevel);
+router.post("/users/assign/manager", authorized, userCtrl.assignAgentsToManager);
 
 /*********
  * 
  * RESPONSES
  *
 **************/
-router.get("/responses", resCtrl.findResponses);
-router.post("/responses", resCtrl.createResponse);
-router.get("/responses/:id", resCtrl.findResponseById);
-router.get("/responses/users/:userId", resCtrl.getUserResponses);
-router.post("/responses/dashboard/:userId", resCtrl.getDashboardStats);
+router.get("/responses", authorized, resCtrl.findResponses);
+router.post("/responses", authorized, resCtrl.createResponse);
+router.get("/responses/:id", authorized, resCtrl.findResponseById);
+router.get("/responses/users/:userId", authorized, resCtrl.getUserResponses);
+router.post("/responses/dashboard", authorized, resCtrl.getDashboardStats);
 
 module.exports  = router;

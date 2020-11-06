@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ChartDataSets } from 'chart.js';
 import { Color, Label } from 'ng2-charts';
 import { DashboardService } from '../services/dashboard.service';
-import { UsersService } from '../services/users.service';
+import { TokenStorageService } from '../services/token-storage.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -11,9 +11,9 @@ import { UsersService } from '../services/users.service';
 })
 
 export class DashboardComponent implements OnInit {
-
-  userFullName  : string;
-  currentLevel  : string;
+  userId: any;
+  startDate: any;
+  endDate: any;
   dashboardStats: any;
   /* Trends Data Arrays */
   monthData: any;
@@ -30,27 +30,33 @@ export class DashboardComponent implements OnInit {
     alert("Download Button clicked");
   }
 
-  constructor(private dashboardService: DashboardService, private userService: UsersService){ }
+  constructor(
+    private dashboardService: DashboardService,
+    private tokenStorageService: TokenStorageService
+  ){}
   
   ngOnInit(): void {
-    this.userFullName   = this.userService.getUserFullName();
-    this.currentLevel   = this.userService.getUserAuthLevel();
-    this.dashboardStats = this.dashboardService.getUserDashboardStatistics();
-    this.monthData = this.dashboardStats.trend.map((mth:any)=>{return mth.NPSMonth;});
-    this.npsData   = this.dashboardStats.trend.map((score: any)=>{return score.NPSScore;});
-    this.promotersData  = this.dashboardStats.trend.map((promoter:any)=>{return promoter.promoters;});
-    this.detractorsData = this.dashboardStats.trend.map((detractor: any)=>{return detractor.detractors;});
-    this.lineChartData  = [
-      { data: this.npsData, label: 'Net Promoter Score' , fill:false  },
-      { data: this.promotersData, label: 'Promoters',     fill: false },
-      { data: this.detractorsData, label: 'Detractors',   fill: false },
-    ];
-    this.lineChartType   = 'line';
-    this.lineChartLabels = this.monthData;
-    this.lineChartColors = [
-      { borderColor: '#43b02a', backgroundColor: '#43b02a' },
-      { borderColor: '#f98436', backgroundColor: '#f98436' },
-      { borderColor: '#e4002b', backgroundColor: '#e4002b' },
-    ];
+    this.userId    = this.tokenStorageService.getUser().id;
+    this.startDate = '2020-11-09';
+    this.endDate   = '2020-11-30';
+    this.dashboardService.getDashboardStats(this.userId,this.startDate,this.endDate).subscribe((data)=>{
+      this.dashboardStats =  data.body.scores;
+      this.monthData      =  data.body.scores.trend.map((mth:any)=>{return mth.NPSMonth;});
+      this.npsData        =  data.body.scores.trend.map((score: any)=>{return score.NPSScore;});
+      this.promotersData  =  data.body.scores.trend.map((promoter:any)=>{return promoter.promoters;});
+      this.detractorsData =  data.body.scores.trend.map((detractor: any)=>{return detractor.detractors;});
+      this.lineChartData  = [
+        { data: this.npsData,label:'Net Promoter Score',fill:false,borderWidth:2,pointRadius:2 },
+        { data: this.promotersData,label:'Promoters',fill:false,borderWidth:2,pointRadius:2 },
+        { data: this.detractorsData,label:'Detractors',fill:false,borderWidth:2,pointRadius:2 },
+      ];
+      this.lineChartLabels = this.monthData;
+      this.lineChartType   = 'line';
+      this.lineChartColors = [
+        { borderColor: '#43b02a', backgroundColor: '#43b02a' },
+        { borderColor: '#f98436', backgroundColor: '#f98436' },
+        { borderColor: '#e4002b', backgroundColor: '#e4002b' },
+      ];
+    });
   }
 }
