@@ -81,10 +81,6 @@ const login = (req, res) => {
 
 // }
 
-// const logoutUser    = (req, res) =>{
-
-// }
-
 const validateToken = (req,res,next) => {
 	if(req.headers['authorization']){
 		try{
