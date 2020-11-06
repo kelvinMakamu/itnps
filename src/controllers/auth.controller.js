@@ -102,8 +102,8 @@ const validateToken = (req,res,next) => {
 			next();
 		}
 	}else{
-			req.user = undefined;
-			next();
+    req.user = undefined;
+    next();
 	}
 };
 
