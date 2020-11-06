@@ -89,3 +89,19 @@
   font-weight: lighter;
   margin: 3.5% 1.5% 0% 0% !important; 
 }
+
+.dashboard-dot{
+  width: 5px !important;
+  height: 5px !important;
+  margin-right:1.5% !important;
+  display: inline-block !important;
+  border-radius: 50% !important;
+}
+
+.resolution-dot{
+  background-color: #06d186 !important;
+}
+
+.detractors-dot{
+  background-color: #e3002a !important;
+}
