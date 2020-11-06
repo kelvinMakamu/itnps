@@ -9,12 +9,9 @@ import { TokenStorageService } from '../services/token-storage.service';
 })
 export class ReportsComponent implements OnInit {
 
-  token: any;
-
   constructor(private tokenStorageService: TokenStorageService) { }
 
   ngOnInit(): void {
-    this.token=this.tokenStorageService.getToken();
   }
 
 }
