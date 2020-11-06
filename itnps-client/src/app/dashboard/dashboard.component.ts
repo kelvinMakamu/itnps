@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { ChartDataSets } from 'chart.js';
 import { Color, Label } from 'ng2-charts';
 import { DashboardService } from '../services/dashboard.service';
-//import { UsersService } from '../services/users.service';
 import { TokenStorageService } from '../services/token-storage.service';
 
 @Component({
