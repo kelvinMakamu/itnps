@@ -4,7 +4,10 @@
 
 export const environment = {
   production: false,
+<<<<<<< HEAD
   API_URL: `http://localhost:8185/api/v1/`,
+=======
+>>>>>>> 7337ce27bf3d0b6af6cf35a28e583e3f0465e148
   responsesApiEndpoint: 'http://localhost:8185/api/v1/responses',
 };
 
