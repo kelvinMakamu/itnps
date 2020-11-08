@@ -11,37 +11,42 @@ export class ResponsesService {
     phone: "0722000000",
     nps: 9,
     resolution: 2,
-    satisfaction:3,
+    satisfaction: 3,
     verbatim: "very Good",
   }
 
-  getTimeStamp(): Date {
-    return this.responses.timestamp;
+  getResponses(): any{
+    return this.responses.responses;
   }
 
-  getUsername(): string {
-    return this.responses.username
-  }
+  // getTimeStamp(): Date {
+  //   return this.responses.timestamp;
+  // }
 
-  getPhone(): string {
-    return this.responses.Phone;
-  }
+  // getUsername(): string {
+  //   return this.responses.username
+  // }
 
-  getNps(): number {
-    return this.responses.nps;
-  }
+  // getPhone(): string {
+  //   return this.responses.Phone;
+  // }
+
+  // getNps(): number {
+  //   return this.responses.nps;
+  // }
 
 
-  getResolution(): number {
-    return this.responses.resolution;
-  }
+  // getResolution(): number {
+  //   return this.responses.resolution;
+  // }
 
-  getSatisfaction(): number {
-    return this.responses.satisfaction;
-  }
+  // getSatisfaction(): number {
+  //   return this.responses.satisfaction;
+  // }
 
-  getVerbatim(): string {
-    return this.responses.verbatim;
-  }
+  // getVerbatim(): string {
+  //   return this.responses.verbatim;
+  // }
   constructor() { }
+  
 }

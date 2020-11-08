@@ -30,7 +30,7 @@ import { ResponsesService } from './services/responses.service';
   imports: [
     BrowserModule,
     FormsModule,
-    AppRoutingModule
+    AppRoutingModule,
   ],
   providers: [ResponsesService],
   bootstrap: [AppComponent]
