@@ -13,8 +13,8 @@ export class ResponsesComponent implements OnInit {
   responses: any;
   page: number         = 1;
   count: number        = 0;
-  tableSize:  number   = 5;
-  tableSizes: number[] = [5, 10, 25, 50, 100];
+  tableSize:  number   = 10;
+  tableSizes: number[] = [10, 25, 50, 100];
 
   constructor(
     private responseService: ResponsesService,
