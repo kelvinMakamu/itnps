@@ -56,7 +56,12 @@ const login = (req, res) => {
         res.status(401).json(createResponseBody(1001, msg, [], 1));
         return;
       }else{
-        if (!bcrypt.compare(req.body.password, user.password)) {
+        var validPassword = bcrypt.compareSync(
+          req.body.password,
+          user.password
+        );
+        
+        if (!validPassword) {
           let msg = "Authentication failed. Invalid username/password";
           res.status(401).json(createResponseBody(1001, msg, [], 1));
           return;

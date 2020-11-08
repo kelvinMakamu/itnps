@@ -104,7 +104,6 @@ const getManagerAgents = async (managerID) => {
     }
 }
 
-
 module.exports = {
     getManagerAgents,
     assignManagerAnAgent
