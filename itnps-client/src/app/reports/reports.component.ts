@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UsersService } from '../services/users.service';
+import { TokenStorageService } from '../services/token-storage.service';
 
 @Component({
   selector: 'app-reports',
@@ -8,14 +9,9 @@ import { UsersService } from '../services/users.service';
 })
 export class ReportsComponent implements OnInit {
 
-  userFullName  : string;
-  currentLevel  : string;
-
-  constructor(private userService: UsersService) { }
+  constructor(private tokenStorageService: TokenStorageService) { }
 
   ngOnInit(): void {
-      this.userFullName   = this.userService.getUserFullName();
-      this.currentLevel   = this.userService.getUserAuthLevel();
   }
 
 }

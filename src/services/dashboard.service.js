@@ -371,10 +371,52 @@ const getTotalResponses  = async (userID,medium,startDate,endDate) => {
 }
 
 const getUserMonthlyTNPSTrend = async (userID,medium,startDate,endDate) => {
-    return {
-        NPSMonth:'Jan 2020',
-        NPSScore: 7
-    }
+    const trend = [
+      {
+        "NPSMonth": "Jan 2020",
+        "NPSScore": -20,
+        "promoters": 20,
+        "detractors": 40
+      },
+      {
+        "NPSMonth": "Feb 2020",
+        "NPSScore": 0,
+        "promoters": 40,
+        "detractors": 40
+      },
+      {
+        "NPSMonth": "Mar 2020",
+        "NPSScore": 20,
+        "promoters": 56,
+        "detractors": 40
+      },
+      {
+        "NPSMonth": "Apr 2020",
+        "NPSScore": 40,
+        "promoters": 55,
+        "detractors": 15
+      },
+      {
+        "NPSMonth": "May 2020",
+        "NPSScore": 10,
+        "promoters": 50,
+        "detractors": 40
+      },
+      {
+        "NPSMonth": "June 2020",
+        "NPSScore": -5,
+        "promoters": 35,
+        "detractors": 40
+      },
+      {
+        "NPSMonth": "July 2020",
+        "NPSScore": -7,
+        "promoters": 33,
+        "detractors": 40
+      }
+    ];
+    
+    return trend;
 };
 
 const getUserDashboardStats   = async (userID,medium,startDate,endDate) => {
@@ -382,8 +424,8 @@ const getUserDashboardStats   = async (userID,medium,startDate,endDate) => {
     if(logged !== 1005){
         const issuesResolution  = await getIssueResolution(userID,medium,startDate,endDate);
         const resolution = {
-            positive: issuesResolution.agreed,
-            negative: issuesResolution.disputed
+            positive: issuesResolution.agreed   ? issuesResolution.agreed   : 0,
+            negative: issuesResolution.disputed ? issuesResolution.disputed : 0,
         };
         const userNPS           = await getNPSPercent(userID, medium, startDate, endDate); 
         const percentDetractors = await getDetractors(userID,medium,startDate,endDate);

@@ -20,20 +20,10 @@ responses: any;
   // satisfaction: number;
   // verbatim: String
 
-  constructor(private userService: UsersService, private responsesService: ResponsesService) { }
+
+  constructor(private userService: UsersService) { }
 
   ngOnInit(): void {
-    this.userFullName = this.userService.getUserFullName();
-    this.currentLevel = this.userService.getUserAuthLevel();
-    this.responses = this.responsesService.getResponses()
-  
-    
-    // this.username = this.responsesService.getUsername();
-    // this.phone = this.responsesService.getPhone();
-    // this.nps = this.responsesService.getNps();
-    // this.resolution = this.responsesService.getResolution();
-    // this.satisfaction = this.responsesService.getSatisfaction();
-    // this.verbatim = this.responsesService.getVerbatim();
   }
 
 }

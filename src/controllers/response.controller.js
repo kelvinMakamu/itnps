@@ -89,7 +89,7 @@ exports.getUserResponses = async (req, res) => {
 };
 //{medium,startDate,endDate}
 exports.getDashboardStats = async (req, res) => {
-    const invalid = !req.params.userId || !req.body.startDate ||
+    const invalid = !req.body.userId || !req.body.startDate ||
 	 !req.body.endDate;
 	 
     if(invalid){
@@ -97,13 +97,13 @@ exports.getDashboardStats = async (req, res) => {
 		res.status(401).json(createResponseBody(1001,msg,[],1));
 		return;
     }else{
-        const userID    = req.params.userId;
+        const userID    = req.body.userId;
         const medium    = req.body.medium || 125;
         const startDate = req.body.startDate;
         const endDate   = req.body.endDate;
         const stats = await getUserDashboardStats(userID,medium,startDate,endDate);
         if(stats  === 1005){
-            let msg = `User raw responses not found for user ID ${req.params.userId}.`;
+            let msg = `User raw responses not found for user ID ${req.body.userId}.`;
             res.status(401).json(createResponseBody(1003,msg,[],1));
             return;
         }else{

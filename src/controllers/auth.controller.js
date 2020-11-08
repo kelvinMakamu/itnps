@@ -1,17 +1,20 @@
 const bcrypt = require("bcrypt");
-const jwt = require("jsonwebtoken");
+const jwt    = require("jsonwebtoken");
 const CONFIG = require("../configs/config");
-const User = require("../models/users.model");
-const { createResponseBody } = require("../commons/utilities");
+const User   = require("../models/users.model");
+const { 
+  createResponseBody,
+  determineUserLevel
+
+}           = require("../commons/utilities");
 
 const loginRequired = (req, res, next) => {
-  if (req.user) {
-    next();
-  } else {
+  if(!req.user) {
     let msg = "Unauthorized user";
     res.status(401).json(createResponseBody(1001, msg, [], 1));
     return;
   }
+  next();
 };
 
 const registerUser = (req, res) => {
@@ -22,7 +25,7 @@ const registerUser = (req, res) => {
     !req.body.email ||
     !req.body.password;
 
-  if (invalid) {
+  if(invalid){
     let msg = "Please provide correct details";
     res.status(401).json(createResponseBody(1001, msg, [], 1));
     return;
@@ -41,61 +44,57 @@ const registerUser = (req, res) => {
 };
 
 const login = (req, res) => {
-  User.findOne(
-    {
-      email: req.body.email,
-    },
+  User.findOne({ username: req.body.username },
     (err, user) => {
-      if (err) {
+      if(err){
         res.status(400).json(createResponseBody(1001, err, [], 1));
         return;
       }
-      if (!user) {
+
+      if(!user){
         let msg = "Authentication failed. No user found";
         res.status(401).json(createResponseBody(1001, msg, [], 1));
         return;
-      } else {
+      }else{
         if (!bcrypt.compare(req.body.password, user.password)) {
-          let msg = "Authentication failed. Invalid email/password";
+          let msg = "Authentication failed. Invalid username/password";
           res.status(401).json(createResponseBody(1001, msg, [], 1));
           return;
         } else {
-          let token = {
-            access_token: jwt.sign(
-              { email: user.email, username: user.username, _id: user._id },
-              CONFIG.SECRET
-            ),
+          let authToken = { 
+            token: jwt.sign({ id: user._id, email:user.email },CONFIG.SECRET),
+            user: {
+              id: user._id,
+              name: `${user.first_name} ${user.last_name}`,
+              userLevel: determineUserLevel(user.level)
+            }
           };
           let msg = "User authenticated successfully";
-          res.status(200).json(createResponseBody(1000, msg, token, 0));
+          res.status(200).json(createResponseBody(1000, msg, authToken, 0));
         }
       }
     }
   );
 };
 
-const resetPassword = (req, res) =>{
+// const resetPassword = (req, res) =>{
 
-}
+// }
 
-const logoutUser    = (req, res) =>{
-
-}
-
-const isValidToken = (req,res,next) => {
+const validateToken = (req,res,next) => {
 	if(req.headers['authorization']){
 		try{
-			let authorization = req.headers['authorization'].split(' ');
-			if(authorization[0] !== 'Bearer') {
-				req.user = undefined;
+			let auth    = req.headers['authorization'].split(' ');
+			if(auth[0] !== 'Bearer'){
+				req.user  = undefined;
 				next();
 			}else{
-				jwt.verify(authorization[1],CONFIG.SECRET,(err,decode) =>{
+				jwt.verify(auth[1], CONFIG.SECRET,(err,decode) =>{
 					if(err){
 						req.user = undefined;
 					}
-					req.user = decode;
-					next();
+          req.user = decode.id;
+          next();
 				});
 			}
 		}catch(err){
@@ -110,9 +109,7 @@ const isValidToken = (req,res,next) => {
 
 module.exports = {
 	login,
-	isValidToken,
+	validateToken,
 	registerUser,
-	loginRequired,
-	resetPassword,
-	logoutUser
+	loginRequired
 }
