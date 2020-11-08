@@ -9,8 +9,8 @@ import { TokenStorageService } from '../services/token-storage.service';
 })
 export class ResponsesComponent implements OnInit {
 
-  userId:    any;
-  responses: any;
+  userId:              any;
+  responses:           any;
   page: number         = 1;
   count: number        = 0;
   tableSize:  number   = 10;

@@ -3,6 +3,9 @@ import { ChartDataSets } from 'chart.js';
 import { Color, Label } from 'ng2-charts';
 import { DashboardService } from '../services/dashboard.service';
 import { TokenStorageService } from '../services/token-storage.service';
+import { Filter } from '../models/filter';
+
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-dashboard',
@@ -15,6 +18,7 @@ export class DashboardComponent implements OnInit {
   startDate: any;
   endDate: any;
   dashboardStats: any;
+  searchModel: any = new Filter('','');
   /* Trends Data Arrays */
   monthData: any;
   npsData: any;
@@ -26,19 +30,15 @@ export class DashboardComponent implements OnInit {
   lineChartColors: Color[];
   lineChartType: string;
 
-  exportResponse(): void {
-    alert("Download Button clicked");
-  }
-
   constructor(
     private dashboardService: DashboardService,
     private tokenStorageService: TokenStorageService
   ){}
-  
-  ngOnInit(): void {
+
+  filterDashboardStats(model: any): any {
     this.userId    = this.tokenStorageService.getUser().id;
-    this.startDate = '2020-11-06';
-    this.endDate   = '2020-11-06';
+    this.startDate = model.startDate ? model.startDate : environment.DEFAULT_FILTER_START_DATE;
+    this.endDate   = model.endDate   ? model.endDate   : environment.DEFAULT_FILTER_END_DATE;
     this.dashboardService.getDashboardStats(this.userId,this.startDate,this.endDate).subscribe((data)=>{
       this.dashboardStats =  data.body.scores;
       this.monthData      =  data.body.scores.trend.map((mth:any)=>{return mth.NPSMonth;});
@@ -58,5 +58,9 @@ export class DashboardComponent implements OnInit {
         { borderColor: '#e4002b', backgroundColor: '#e4002b' },
       ];
     });
+  }
+  
+  ngOnInit() {
+    this.filterDashboardStats(this.searchModel);
   }
 }

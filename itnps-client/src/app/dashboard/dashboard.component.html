@@ -9,36 +9,8 @@
         <!--- START CONTENT HERE -->
           <div class="col-md-10 col-lg-10 col-sm-12">
             <div class="search-controls card">
-              <div class="container">
-                <form>
-                  <div class="row">
-                    <div class="col-md-2 col-lg-2 col-sm-12">
-                      <input type="text" class="form-control start-date-search"
-                       placeholder="Start Date">
-                    </div>
-                    <div class="col-md-2 col-lg-2 col-sm-12">
-                      <input type="text" class="form-control end-date-search"
-                       placeholder="End Date">
-                    </div>
-                    <div class="col-md-2 col-lg-2 col-sm-12">
-                      <input type="button" class="btn btn-success btn-block" value="Filter">
-                    </div>
-                    <div class="col-md-2 col-lg-2 col-sm-12">
-                      <input type="button" class="btn btn-default btn-block" value="Clear">
-                    </div>
-                    <!-- <div class="col-md-4 col-lg-4 col-sm-12">
-                      <a class="export-report" (click)='exportResponse()'>
-                        <p>
-                          <i class="fa fa-cloud-download" aria-hidden="true"></i>&nbsp; 
-                          <span>Export Report</span>&nbsp;
-                          <i class="fa fa-angle-down" aria-hidden="true"></i> 
-                        </p>
-                      </a>
-                    </div> -->
-                  </div>
-                </form>
-              </div>
-        </div>
+              <app-filter-form (filterDashboard)='filterDashboardStats($event)'></app-filter-form>
+            </div>
   
           <div class="stat-panes">
             <div class="row">

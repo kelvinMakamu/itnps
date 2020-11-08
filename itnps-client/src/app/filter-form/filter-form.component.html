@@ -1,0 +1,33 @@
+<div class="container">
+    <form  #searchForm="ngForm">
+        <div class="row">
+            <div class="col-md-2 col-lg-2 col-sm-12">
+            <input type="text" class="form-control start-date-search"
+                placeholder="Start Date" name="startDate"
+                [(ngModel)]="model.startDate" #startDate="ngModel">
+            </div>
+            <div class="col-md-2 col-lg-2 col-sm-12">
+                <input type="text" class="form-control end-date-search"
+                placeholder="End Date" name="endDate"
+                [(ngModel)]="model.endDate" #endDate="ngModel">
+            </div>
+            <div class="col-md-2 col-lg-2 col-sm-12">
+                <input type="button" class="btn btn-success btn-block" value="Filter"
+                [disabled]="!searchForm.form.valid" (click)='filterDashboardData()'>
+            </div>
+            <div class="col-md-2 col-lg-2 col-sm-12">
+                <input type="button" class="btn btn-default btn-block" value="Clear"
+                (click)='searchForm.reset();filterDashboardData();'>
+            </div>
+            <!-- <div class="col-md-4 col-lg-4 col-sm-12">
+            <a class="export-report" (click)='exportResponse()'>
+                <p>
+                <i class="fa fa-cloud-download" aria-hidden="true"></i>&nbsp; 
+                <span>Export Report</span>&nbsp;
+                <i class="fa fa-angle-down" aria-hidden="true"></i> 
+                </p>
+            </a>
+            </div> -->
+        </div>
+    </form>
+</div>
