@@ -59,5 +59,6 @@
 .alert{
     color: #000000;
     margin-left: 10%;
-    font-weight: lighter;
+    font-size: 12px;
+    width: 100%;
 }
