@@ -3,12 +3,14 @@
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
-    padding: 15% 36% 25% 36%;
+    width: 100.05%;
+    height: 100vh;
+    padding: 15% 36% 25% 36%;  
 }
 
 .auth-card{
-    width: 372px;
-    height: 375px;
+    width: 100%;
+    height: auto;
     border-radius: 10px;
     border: solid 1px #707070;
     background-color: #ffffff;
@@ -41,7 +43,21 @@
     top: 50%; 
     left: 25%;
     position: relative;
+    width:  56% !important;
+    height: auto !important;
     margin: 2.5% 0% 2.5% 0%;
-    width:  203px !important;
-    height: 34px !important;
+}
+
+.ng-valid[required],.ng-valid.required{
+    border-left: 4px solid #43b02a;
+}
+
+.ng-invalid:not(form){
+    border-left: 4px solid #e3002a; 
+}
+
+.alert{
+    color: #000000;
+    margin-left: 10%;
+    font-weight: lighter;
 }

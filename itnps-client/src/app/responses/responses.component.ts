@@ -1,5 +1,6 @@
-import { Component, OnInit, Output } from '@angular/core';
-import { UsersService } from '../services/users.service';
+import { Component, OnInit } from '@angular/core';
+import { ResponsesService } from '../services/responses.service';
+import { TokenStorageService } from '../services/token-storage.service';
 
 @Component({
   selector: 'app-responses',
@@ -8,10 +9,38 @@ import { UsersService } from '../services/users.service';
 })
 export class ResponsesComponent implements OnInit {
 
+  userId:    any;
+  responses: any;
+  page: number         = 1;
+  count: number        = 0;
+  tableSize:  number   = 5;
+  tableSizes: number[] = [5, 10, 25, 50, 100];
 
-  constructor(private userService: UsersService) { }
+  constructor(
+    private responseService: ResponsesService,
+    private tokenStorageService: TokenStorageService
+  ){}
 
   ngOnInit(): void {
+    this.userId = this.tokenStorageService.getUser().id;
+    this.fetchResponses();
   }
+
+  fetchResponses(): void {
+    this.responseService.getRawResponses(this.userId).subscribe((data) => {
+      this.responses = data.body;
+    });
+  }
+
+  onTableDataChange(event: any){
+    this.page = event;
+    this.fetchResponses();
+  }  
+
+  onTableSizeChange(event: any): void {
+    this.tableSize = event.target.value;
+    this.page = 1;
+    this.fetchResponses();
+  }  
 
 }

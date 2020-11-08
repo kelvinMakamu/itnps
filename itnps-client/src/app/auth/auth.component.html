@@ -20,14 +20,16 @@
                                         <input type="text" name="username"
                                             [(ngModel)]="form.username"
                                             required
+                                            minlength="3"
                                             #username="ngModel"
                                             class="form-control auth-input"
                                             placeholder="Enter Username"
                                         >
                                     </div>
-                                    <!-- <div class="alert alert-danger" role="alert" *ngIf="f.submitted && username.invalid">
-                                      Username is required!
-                                    </div> -->
+                                    <div [hidden]="username.valid || username.pristine"
+                                    class="alert alert-danger" role="alert">
+                                       Username should be more than three(3) characters
+                                   </div>
                                 </div>
                             </div>
                             <div class="row">
@@ -42,10 +44,10 @@
                                             placeholder="Enter Password"
                                         >
                                     </div>
-                                    <!-- <div *ngIf="password.errors.required">Password is required</div>
-                                    <div *ngIf="password.errors.minlength">
-                                        Password must be at least 6 characters
-                                    </div> -->
+                                    <div [hidden]="password.valid || password.pristine"
+                                    class="alert alert-danger" role="alert">
+                                       Password should be more than six(6) characters
+                                   </div>
                                 </div>
                             </div>
                             <div class="row">
@@ -56,12 +58,14 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="form-group">
-                                    <div class="alert alert-danger" role="alert"
-                                      *ngIf="f.submitted && isLoginFailed"
-                                    >
-                                      Login failed: {{ errorMessage }}
-                                    </div>
+                                <div class="col-md-10 col-lg-10 col-sm-12">
+                                    <div class="form-group">
+                                        <div class="alert alert-danger" role="alert"
+                                        *ngIf="f.submitted && isLoginFailed"
+                                        >
+                                        Login failed: {{ errorMessage }}
+                                        </div>
+                                  </div>
                                   </div>
                             </div>
                         </form>

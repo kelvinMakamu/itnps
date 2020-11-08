@@ -1,3 +1,4 @@
-/* th {
-    text-align: left;
-  } */
+.custom-pagination /deep/ .ngx-pagination .current {
+    background: #43b02a !important;
+    border-radius: 50% !important;
+}

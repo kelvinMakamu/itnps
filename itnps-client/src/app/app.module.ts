@@ -9,6 +9,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AuthComponent } from './auth/auth.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { TnpsTrendsComponent } from './tnps-trends/tnps-trends.component';
+import { NgxPaginationModule } from 'ngx-pagination';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { SideBarComponent } from './side-bar/side-bar.component';
 import { ReportsComponent } from './reports/reports.component';
@@ -34,11 +35,12 @@ import { ErrorInterceptor } from './helpers/error.interceptor';
     FormsModule,
     ChartsModule,
     HttpClientModule,
+    NgxPaginationModule,
     AppRoutingModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true   },
-    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true }
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
   ],
   bootstrap: [AppComponent]
 })
