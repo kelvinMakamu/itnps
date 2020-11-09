@@ -1,0 +1,22 @@
+:host ::ng-deep .ngb-dp-month {
+    font-style: normal !important;
+    color: #000000 !important;
+    font-size: 11px !important;
+}
+
+:host ::ng-deep .ngb-dp-header{
+    font-style: normal !important;
+    color: #000000 !important;
+    font-size: 11px !important;
+}
+
+:host ::ng-deep .ngb-dp-weekdays .ngb-dp-weekday{
+    font-style: normal !important;
+    color: #000000 !important;
+    font-size: 11px !important;
+}
+
+:host ::ng-deep .ngb-dp-arrow .ngb-dp-arrow-btn{
+    font-size: 11px !important;
+    color: #000000 !important;
+}

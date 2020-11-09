@@ -18,6 +18,7 @@ import { HelpComponent } from './help/help.component';
 import { JwtInterceptor } from './helpers/jwt.interceptor';
 import { ErrorInterceptor } from './helpers/error.interceptor';
 import { FilterFormComponent } from './filter-form/filter-form.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ import { FilterFormComponent } from './filter-form/filter-form.component';
     ChartsModule,
     HttpClientModule,
     NgxPaginationModule,
-    AppRoutingModule
+    AppRoutingModule,
+    NgbModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true   },
