@@ -42,6 +42,28 @@ input:focus, textarea:focus, input.form-control:focus, select:focus {
     -webkit-box-shadow: none !important;
 }
 
+.swal2-cancel, .swal2-cancel:focus {
+    outline:none !important;
+    outline-width: 0 !important;
+    box-shadow: none !important;
+    font-weight: 500 !important;
+    -moz-box-shadow: none !important;
+    -webkit-box-shadow: none !important;
+    text-transform: capitalize !important;
+    border: 1px solid #757575 !important;
+}
+
+.swal2-confirm, .swal2-confirm:focus  {
+    outline:none !important;
+    outline-width: 0 !important;
+    box-shadow: none !important;
+    font-weight: 500 !important;
+    -moz-box-shadow: none !important;
+    -webkit-box-shadow: none !important;
+    text-transform: capitalize !important;
+    border: 1px solid #43b02a !important;
+}
+
 .form-control{
     border: solid 1px #43b02a;
 }
