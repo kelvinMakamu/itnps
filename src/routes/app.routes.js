@@ -37,7 +37,7 @@ router.post("/users/assign/manager", authorized, userCtrl.assignAgentsToManager)
 router.get("/responses", authorized, resCtrl.findResponses);
 router.post("/responses", authorized, resCtrl.createResponse);
 router.get("/responses/:id", authorized, resCtrl.findResponseById);
-router.get("/responses/users/:userId", authorized, resCtrl.getUserResponses);
+router.post("/responses/users", authorized, resCtrl.getUserResponses);
 router.post("/responses/dashboard", authorized, resCtrl.getDashboardStats);
 
 module.exports  = router;

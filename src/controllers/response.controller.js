@@ -68,17 +68,17 @@ exports.findResponses = (req,res) => {
 };
 //{medium,startDate,endDate}
 exports.getUserResponses = async (req, res) => {
-    const invalid = !req.params.userId;
+    const invalid = !req.body.userId;
 	 
     if(invalid){
         let msg = "Please provide unique user Id";
 		res.status(401).json(createResponseBody(1001,msg,[],1));
 		return;
     }else{
-        const userID     = req.params.userId;
+        const userID     = req.body.userId;
         const responses  = await getUserRawResponses(userID);
         if(responses === 1005){
-            let msg = `User raw responses not found for user ID ${req.params.userId}.`;
+            let msg = `User raw responses not found for user ID ${req.body.userId}.`;
             res.status(401).json(createResponseBody(1003,msg,[],1));
             return;
         }else{
