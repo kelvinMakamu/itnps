@@ -40,12 +40,15 @@
                                 let i = index" [class.active]="i == currentIndex">
                                 <td>{{ page == 1 ? (i+1) : (tableSize*(page-1)) + (i+1) }}</td>
                                 <td>{{ response.createdAt| date }}</td>
-                                <td>{{ response.agent_id | uppercase }}</td>
+                                <td>
+                                  {{ response.agent_id.first_name | titlecase }}
+                                  {{ response.agent_id.last_name  | titlecase }}
+                                </td>
                                 <td>{{ response.medium }}</td>
                                 <td>{{ response.satisfaction}}</td>
                                 <td>{{ response.resolution}}</td>
                                 <td>{{ response.nps_score }}</td>
-                                <td class="text-wrap">{{ response.verbatim }}</td>
+                                <td class="text-wrap verbatim-wrap">{{ response.verbatim }}</td>
                               </tr>
                             </tbody>
                           </table>
