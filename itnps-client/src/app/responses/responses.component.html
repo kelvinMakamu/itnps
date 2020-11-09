@@ -39,8 +39,8 @@
                                         currentPage: page, totalItems: count };
                                 let i = index" [class.active]="i == currentIndex">
                                 <td>{{ page == 1 ? (i+1) : (tableSize*(page-1)) + (i+1) }}</td>
-                                <td>{{ response.createdAt | date }}</td>
-                                <td>{{ 'Yellow' }}</td>
+                                <td>{{ response.createdAt| date }}</td>
+                                <td>{{ response.agent_id | uppercase }}</td>
                                 <td>{{ response.medium }}</td>
                                 <td>{{ response.satisfaction}}</td>
                                 <td>{{ response.resolution}}</td>

@@ -1,8 +1,6 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { Filter } from '../models/filter';
 
-import { NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
-
 @Component({
   selector: 'app-filter-form',
   templateUrl: './filter-form.component.html',
@@ -17,8 +15,8 @@ export class FilterFormComponent implements OnInit {
   @Output() filterDashboard = new EventEmitter<any>();
 
   filterDashboardData(){
-    this.model.startDate = this.toModel(this.model.startDate);
-    this.model.endDate = this.toModel(this.model.endDate);
+    this.model.startDate = this.formatSelectedDate(this.model.startDate);
+    this.model.endDate   = this.formatSelectedDate(this.model.endDate);
     this.filterDashboard.emit(this.model);
   }
 
@@ -26,7 +24,7 @@ export class FilterFormComponent implements OnInit {
   
   ngOnInit(){}
 
-  toModel(date: any): string {
+  formatSelectedDate(date: any): string {
     return date ? date.year + this.DELIMITER + date.month + this.DELIMITER + date.day : '';
   }
 

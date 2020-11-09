@@ -17,12 +17,12 @@ export class UsersService {
     return this.httpClient.get<any>(`${environment.API_URL}/users/${userId}`);
   }
   
-  getUserFullName(userId: any): Observable<string>{
+  getUserFullName(userId: any): string{
     this.httpClient.get<any>(`${environment.API_URL}/users/${userId}`)
     .subscribe((data) => {
       this.fullname = `${data.body.first_name} ${data.body.last_name}`;
     });
-    return of(this.fullname);
+    return this.fullname;
   }
   
 }

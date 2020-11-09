@@ -19,6 +19,7 @@ import { JwtInterceptor } from './helpers/jwt.interceptor';
 import { ErrorInterceptor } from './helpers/error.interceptor';
 import { FilterFormComponent } from './filter-form/filter-form.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { AgentNamePipe } from './helpers/agent-name.pipe';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     ReportsComponent,
     ResponsesComponent,
     HelpComponent,
-    FilterFormComponent
+    FilterFormComponent,
+    AgentNamePipe
   ],
   imports: [
     BrowserModule,
