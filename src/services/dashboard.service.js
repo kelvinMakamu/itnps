@@ -63,7 +63,7 @@ const getUserRawResponses = async (userID) => {
             };
             break;
         }
-        const responses = await Response.find(condition);
+        const responses = await Response.find(condition).populate('agent_id',"first_name last_name");
         if(responses){
             return responses;
         }else{
