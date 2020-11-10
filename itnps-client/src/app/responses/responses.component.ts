@@ -9,7 +9,7 @@ import { UsersService } from '../services/users.service';
   providers: [ResponsesService]
 })
 export class ResponsesComponent implements OnInit {
-responses: any;
+  responses: any;
   userFullName: string;
   currentLevel: string;
   // timestamp: Date;
@@ -21,9 +21,15 @@ responses: any;
   // verbatim: String
 
 
-  constructor(private userService: UsersService) { }
+  constructor(private userService: UsersService, private responsesService: ResponsesService) { }
 
   ngOnInit(): void {
+    this.responsesService.getResponses().subscribe(response => {
+      console.log(response)
+      this.responses=response.body
+    }
+    )
+
   }
 
 }

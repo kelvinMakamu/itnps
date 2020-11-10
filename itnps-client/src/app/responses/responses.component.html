@@ -1,25 +1,45 @@
 <app-nav-bar></app-nav-bar>
 
 <div class="screen">
-  <div class="container">
-      <div class="row">
-        <div class="card sidemenu col-md-2 col-lg-2 col-sm-12">
-          <app-side-bar></app-side-bar>
+    <div class="container">
+        <div class="row">
+            <div class="card sidemenu col-md-2 col-lg-2 col-sm-12">
+                <app-side-bar></app-side-bar>
             </div>
             <!--- START CONTENT HERE -->
             <div class="col-md-10 col-lg-10 col-sm-12">
                 <div class="card">
                     <h4>Responses</h4>
-                    <table >
+                    <table>
                         <tr>
                             <th>Time Stamp</th>
                             <th>Staff username</th>
                             <th>Mobile/Extension No</th>
                             <th>NPS Score</th>
                             <th>Resolution</th>
-                            <th> Verbatim</th>
                             <th>Satisfaction</th>
+                            <th> Verbatim</th>
                         </tr>
+                        <tr *ngFor="let response of responses">
+                            <td>  {{response.createdAt|date}} </td>
+                            <td>
+                                {{response.agent_id}} </td>
+                            <td>
+                                {{response.medium}} </td>
+                            <td>
+                                {{response.nps_score}} 
+                            </td>
+                            <td>
+                                {{response.resolution}} 
+                            </td>
+                            <td>
+                                {{response.satisfaction}} 
+                            </td>
+                            <td>
+                                {{response.verbatim}} 
+                            </td>
+                        </tr>
+
                     </table>
 
                 </div>

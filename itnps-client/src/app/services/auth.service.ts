@@ -17,4 +17,9 @@ export class AuthService{
     { username: credentials.username, password: credentials.password });
   }
 
+// getAccessToken(){
+//   return localStorage.getItem('user_access_token');
+// }
+
+
 }
