@@ -371,51 +371,57 @@ const getTotalResponses  = async (userID,medium,startDate,endDate) => {
 }
 
 const getUserMonthlyTNPSTrend = async (userID,medium,startDate,endDate) => {
+
+    const promoters        = await getPromoters(userID,medium,startDate,endDate);
+    const percentPromoter  = promoters.percent;
+    const detractors       = await getDetractors(userID,medium,startDate,endDate);
+    const percentDetractor = detractors.percent;
+    const percentNPS       = percentPromoter - percentDetractor;
+
     const trend = [
       {
         "NPSMonth": "Jan 2020",
-        "NPSScore": -20,
-        "promoters": 20,
-        "detractors": 40
+        "NPSScore": percentNPS,
+        "promoters": percentPromoter,
+        "detractors": percentDetractor
       },
       {
         "NPSMonth": "Feb 2020",
-        "NPSScore": 0,
-        "promoters": 40,
-        "detractors": 40
+        "NPSScore": percentNPS,
+        "promoters": percentPromoter,
+        "detractors": percentDetractor
       },
       {
         "NPSMonth": "Mar 2020",
-        "NPSScore": 20,
-        "promoters": 56,
-        "detractors": 40
+        "NPSScore": percentNPS,
+        "promoters": percentPromoter,
+        "detractors": percentDetractor
       },
       {
         "NPSMonth": "Apr 2020",
-        "NPSScore": 40,
-        "promoters": 55,
-        "detractors": 15
+        "NPSScore": percentNPS,
+        "promoters": percentPromoter,
+        "detractors": percentDetractor
       },
       {
         "NPSMonth": "May 2020",
-        "NPSScore": 10,
-        "promoters": 50,
-        "detractors": 40
+        "NPSScore": percentNPS,
+        "promoters": percentPromoter,
+        "detractors": percentDetractor
       },
       {
         "NPSMonth": "June 2020",
-        "NPSScore": -5,
-        "promoters": 35,
-        "detractors": 40
+        "NPSScore": percentNPS,
+        "promoters": percentPromoter,
+        "detractors": percentDetractor
       },
       {
         "NPSMonth": "July 2020",
-        "NPSScore": -7,
-        "promoters": 33,
-        "detractors": 40
+        "NPSScore": percentNPS,
+        "promoters": percentPromoter,
+        "detractors": percentDetractor
       }
     ];
-    
     return trend;
 };
 
