@@ -104,7 +104,22 @@ const getManagerAgents = async (managerID) => {
     }
 }
 
+const enforceCredentialsUniqueness = async(email, username) => {
+    const user = await User.findOne({ username: username});
+    if(user){
+        return 1001;
+    }else{
+        const mailuser = await User.findOne({ email: email});
+        if(mailuser){
+            return 1003;
+        }else{
+            return 1000;
+        }
+    }
+}
+
 module.exports = {
     getManagerAgents,
-    assignManagerAnAgent
+    assignManagerAnAgent,
+    enforceCredentialsUniqueness
 }
