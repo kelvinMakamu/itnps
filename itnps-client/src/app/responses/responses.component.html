@@ -20,14 +20,21 @@
                             <th>Satisfaction</th>
                             <th> Verbatim</th>
                         </tr>
-                        <tr *ngFor="let response of responses"><input type="checkbox">
-                            <td> {{response.createdAt|date}} </td>
+                        <tr *ngFor="let response of responses | paginate : { itemsPerPage: tableSize,
+                                 currentPage: page, totalItems: count };
+                                 let i = index" [class.active]="i == currentIndex">
+                            <td>{{ page == 1 ? (i+1) : (tableSize*(page-1)) + (i+1) }}</td>
+                            <td>{{response.createdAt|date}} </td>
+                            <td>
+                                {{ response.agent_id.first_name | titlecase }}
+                                {{ response.agent_id.last_name | titlecase }}
+                            </td>
                             <td>{{response.agent_id}} </td>
                             <td>{{response.medium}} </td>
                             <td>{{response.nps_score}}</td>
                             <td> {{response.resolution}} </td>
                             <td>{{response.satisfaction}} </td>
-                            <td> {{response.verbatim}} </td>
+                            <td class="text-wrap verbatim-wrap"> {{response.verbatim}} </td>
                         </tr>
 
                     </table>

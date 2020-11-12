@@ -3,6 +3,9 @@ import { FormsModule } from '@angular/forms';
 import { ChartsModule } from 'ng2-charts';
 import { NgModule } from '@angular/core';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import {NgxPaginationModule} from 'ngx-pagination';
+import { DatePickerModule } from 'angular-material-datepicker';
+
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
@@ -31,6 +34,8 @@ import { ErrorInterceptor } from './helpers/error.interceptor';
   ],
   imports: [
     BrowserModule,
+    NgxPaginationModule,
+    DatePickerModule,
     FormsModule,
     ChartsModule,
     HttpClientModule,
