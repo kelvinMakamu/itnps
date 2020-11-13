@@ -1,6 +1,6 @@
-import { Component, OnInit, Output } from '@angular/core';
+import { Component, OnInit, } from '@angular/core';
 import { ResponsesService } from '../services/responses.service';
-import { UsersService } from '../services/users.service';
+import { TokenStorageService } from '../services/token-storage.service';
 
 @Component({
   selector: 'app-responses',
@@ -12,24 +12,37 @@ export class ResponsesComponent implements OnInit {
   responses: any;
   userFullName: string;
   currentLevel: string;
-  // timestamp: Date;
-  // username: String;
-  // phone: String;
-  // nps: number;
-  // resolution: number;
-  // satisfaction: number;
-  // verbatim: String
+  userId:              any;
+  page: number         = 1;
+  count: number        = 0;
+  tableSize:  number   = 7;
+  tableSizes: number[] = [10, 25, 50, 100];
 
-
-  constructor(private userService: UsersService, private responsesService: ResponsesService) { }
+  constructor(
+    private responseService: ResponsesService,
+    private tokenStorageService: TokenStorageService
+  ){}
 
   ngOnInit(): void {
-    this.responsesService.getResponses().subscribe(response => {
-      console.log(response)
-      this.responses=response.body
-    }
-    )
-
+    this.userId = this.tokenStorageService.getUser().id;
+    this.fetchResponses();
   }
+
+  fetchResponses(): void {
+    this.responseService.getRawResponses(this.userId).subscribe((data) => {
+      this.responses = data.body;
+    });
+  }
+
+  onTableDataChange(event: any){
+    this.page = event;
+    this.fetchResponses();
+  }  
+
+  onTableSizeChange(event: any): void {
+    this.tableSize = event.target.value;
+    this.page = 1;
+    this.fetchResponses();
+  }  
 
 }

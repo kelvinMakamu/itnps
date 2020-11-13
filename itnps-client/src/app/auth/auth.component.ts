@@ -39,7 +39,7 @@ export class AuthComponent implements OnInit {
         this.router.navigate(['/dashboard']);
       },
       (err) => {
-        this.errorMessage  = err.message;
+        this.errorMessage  = 'Login failed. Invalid username/password.';
         this.isLoginFailed = true;
       }
     );

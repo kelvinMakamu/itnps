@@ -4,7 +4,8 @@ import { ChartsModule } from 'ng2-charts';
 import { NgModule } from '@angular/core';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import {NgxPaginationModule} from 'ngx-pagination';
-import { DatePickerModule } from 'angular-material-datepicker';
+// import {MatDatepickerModule} from '@angular/material/datepicker'
+
 
 
 import { AppComponent } from './app.component';
@@ -19,6 +20,9 @@ import { ResponsesComponent } from './responses/responses.component';
 import { HelpComponent } from './help/help.component';
 import { JwtInterceptor } from './helpers/jwt.interceptor';
 import { ErrorInterceptor } from './helpers/error.interceptor';
+import { FilterFormComponent } from './filter-form/filter-form.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+
 
 @NgModule({
   declarations: [
@@ -30,20 +34,23 @@ import { ErrorInterceptor } from './helpers/error.interceptor';
     SideBarComponent,
     ReportsComponent,
     ResponsesComponent,
-    HelpComponent
+    HelpComponent,
+    FilterFormComponent
   ],
   imports: [
     BrowserModule,
     NgxPaginationModule,
-    DatePickerModule,
+    // MatDatepickerModule,
     FormsModule,
     ChartsModule,
     HttpClientModule,
-    AppRoutingModule
+    NgxPaginationModule,
+    AppRoutingModule,
+    NgbModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true   },
-    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true }
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
   ],
   bootstrap: [AppComponent]
 })

@@ -8,6 +8,11 @@ const {
 
 }           = require("../commons/utilities");
 
+const { 
+  enforceCredentialsUniqueness
+
+}           = require("../services/user.service");
+
 const loginRequired = (req, res, next) => {
   if(!req.user) {
     let msg = "Unauthorized user";
@@ -17,7 +22,7 @@ const loginRequired = (req, res, next) => {
   next();
 };
 
-const registerUser = (req, res) => {
+const registerUser = async (req, res) => {
   const invalid =
     !req.body.first_name ||
     !req.body.last_name ||
@@ -30,17 +35,36 @@ const registerUser = (req, res) => {
     res.status(401).json(createResponseBody(1001, msg, [], 1));
     return;
   }
-  const user = new User(req.body);
-  user.save((err, user) => {
-    if (err) {
-      res.status(400).json(createResponseBody(1001, err, [], 1));
-      return;
-    } else {
-      user.password = undefined;
-      let msg = "User registered successfully.";
-      res.status(200).json(createResponseBody(1000, msg, [], 1));
-    }
-  });
+
+  const enforced = await enforceCredentialsUniqueness(req.body.email,req.body.username);
+
+  switch(enforced){
+    case 1000:
+    const user = new User(req.body);
+    user.save((err, user) => {
+      if(err){
+        res.status(400).json(createResponseBody(1001, err, [], 1));
+        return;
+      }else{
+        user.password = undefined;
+        let msg = "User registered successfully.";
+        res.status(200).json(createResponseBody(1000, msg, [], 1));
+      }
+    });
+    break;
+
+    case 1001:
+    let desc = 'Failed! The username is already in use!';
+    res.status(400).json(createResponseBody(1001, desc, [], 1));
+    return;
+    break;
+
+    case 1003:
+    let descr = 'Failed! The email address is already in use!';
+    res.status(400).json(createResponseBody(1003, descr, [], 1));
+    return;
+    break;
+  }
 };
 
 const login = (req, res) => {
@@ -56,7 +80,12 @@ const login = (req, res) => {
         res.status(401).json(createResponseBody(1001, msg, [], 1));
         return;
       }else{
-        if (!bcrypt.compare(req.body.password, user.password)) {
+        var validPassword = bcrypt.compareSync(
+          req.body.password,
+          user.password
+        );
+        
+        if (!validPassword) {
           let msg = "Authentication failed. Invalid username/password";
           res.status(401).json(createResponseBody(1001, msg, [], 1));
           return;
@@ -102,8 +131,8 @@ const validateToken = (req,res,next) => {
 			next();
 		}
 	}else{
-			req.user = undefined;
-			next();
+    req.user = undefined;
+    next();
 	}
 };
 

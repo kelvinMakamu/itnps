@@ -47,7 +47,7 @@ exports.findResponseById = (req,res) => {
             let msg = "Response details loaded successfully.";
             res.status(200).json(createResponseBody(1000,msg,response,0));
 		}
-	});
+	}).populate('agent_id',"first_name last_name");
 };
 
 exports.findResponses = (req,res) => {
@@ -64,21 +64,21 @@ exports.findResponses = (req,res) => {
             let msg = "Responses loaded successfully.";
             res.status(200).json(createResponseBody(1000,msg,response,0));
 		}
-	});
+	}).populate('agent_id',"first_name last_name");
 };
 //{medium,startDate,endDate}
 exports.getUserResponses = async (req, res) => {
-    const invalid = !req.params.userId;
+    const invalid = !req.body.userId;
 	 
     if(invalid){
         let msg = "Please provide unique user Id";
 		res.status(401).json(createResponseBody(1001,msg,[],1));
 		return;
     }else{
-        const userID     = req.params.userId;
+        const userID     = req.body.userId;
         const responses  = await getUserRawResponses(userID);
         if(responses === 1005){
-            let msg = `User raw responses not found for user ID ${req.params.userId}.`;
+            let msg = `User raw responses not found for user ID ${req.body.userId}.`;
             res.status(401).json(createResponseBody(1003,msg,[],1));
             return;
         }else{
@@ -101,7 +101,7 @@ exports.getDashboardStats = async (req, res) => {
         const medium    = req.body.medium || 125;
         const startDate = req.body.startDate;
         const endDate   = req.body.endDate;
-        const stats = await getUserDashboardStats(userID,medium,startDate,endDate);
+        const stats     = await getUserDashboardStats(userID,medium,startDate,endDate);
         if(stats  === 1005){
             let msg = `User raw responses not found for user ID ${req.body.userId}.`;
             res.status(401).json(createResponseBody(1003,msg,[],1));
