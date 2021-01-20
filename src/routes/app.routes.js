@@ -8,7 +8,6 @@ const authCtrl      = require('../controllers/auth.controller');
 const userCtrl      = require('../controllers/user.controller');
 const resCtrl       = require('../controllers/response.controller');
 const authorized    = [ authCtrl.validateToken ];
-const authenticated = [ authCtrl.loginRequired ]; 
 /*****
  * 
  * AUTH
