@@ -76,6 +76,15 @@ const getManagerAgents = async (managerID) => {
         const manager = await User.findOne({ _id: managerID });
         if(manager){
             switch(manager.level){
+                case 0:
+                const users  = await User.find({},CONFIG.COLS_USER);
+                if(users){
+                    return users;
+                }else{
+                    return 1009;
+                }
+                break;
+
                 case 1:
                 const userIDs = await Manager.find({ manager_id: managerID },'agent_id');
                 let agents = userIDs.map((ID) => {return ID.agent_id});
