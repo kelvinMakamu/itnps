@@ -41,7 +41,7 @@ export class DashboardComponent implements OnInit {
     this.endDate   = model.endDate   ? model.endDate   : environment.DEFAULT_FILTER_END_DATE;
     this.dashboardService.getDashboardStats(this.userId,this.startDate,this.endDate).subscribe((data)=>{
       this.dashboardStats =  data.body.scores;
-      this.monthData      =  data.body.scores.trend.map((mth:any)=>{return mth.NPSMonth;});
+      this.monthData      =  data.body.scores.trend.map((mth:any)=>{return mth.DailyTrend;});
       this.npsData        =  data.body.scores.trend.map((score: any)=>{return score.NPSScore;});
       this.promotersData  =  data.body.scores.trend.map((promoter:any)=>{return promoter.promoters;});
       this.detractorsData =  data.body.scores.trend.map((detractor: any)=>{return detractor.detractors;});

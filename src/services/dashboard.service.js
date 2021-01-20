@@ -1,5 +1,6 @@
 const {
-    determineUserLevel
+    determineUserLevel,
+    formatDatabaseDate
 }               = require('../commons/utilities');
 const User      = require('../models/users.model');
 const Manager   = require('../models/managers.model');
@@ -383,7 +384,7 @@ const getUserMonthlyTNPSTrend = async (userID,medium,startDate,endDate) => {
         const percentDetractor = detractors.percent;
         const percentNPS       = percentPromoter - percentDetractor;
         const trendDetails     = {
-            "NPSMonth"  : new Date(Date.parse(determineDate)),
+            "DailyTrend"  : formatDatabaseDate(determineDate),
             "NPSScore"  : percentNPS,
             "promoters" : percentPromoter,
             "detractors": percentDetractor
