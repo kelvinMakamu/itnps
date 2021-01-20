@@ -5,7 +5,8 @@ const {
 
 const {
     getUserRawResponses,
-    getUserDashboardStats
+    getUserDashboardStats,
+    getUserPeriodicRawResponses
 }               = require('../services/dashboard.service');
 
 
@@ -87,6 +88,32 @@ exports.getUserResponses = async (req, res) => {
         }
     }
 };
+
+exports.getPeriodicUserResponses = async (req,res)=> {
+    const invalid = !req.body.userId || !req.body.startDate ||
+	 !req.body.endDate;
+	 
+    if(invalid){
+        let msg = "Please provide all details";
+		res.status(401).json(createResponseBody(1001,msg,[],1));
+		return;
+    }else{
+        const userID    = req.body.userId;
+        const medium    = req.body.medium || 125;
+        const startDate = req.body.startDate;
+        const endDate   = req.body.endDate;
+        const responses = await getUserPeriodicRawResponses(userID,medium,startDate,endDate);
+        if(responses  === 1005){
+            let msg = `User periodic raw responses not found for user ID ${req.body.userId}.`;
+            res.status(401).json(createResponseBody(1003,msg,[],1));
+            return;
+        }else{
+            let msg     = "Periodic raw responses loaded successfully.";
+            res.status(200).json(createResponseBody(1000,msg,responses,0));
+        }
+    }
+};
+
 //{medium,startDate,endDate}
 exports.getDashboardStats = async (req, res) => {
     const invalid = !req.body.userId || !req.body.startDate ||

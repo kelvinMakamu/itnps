@@ -72,7 +72,7 @@ input:focus, textarea:focus, input.form-control:focus, select:focus {
     font-weight: lighter !important;
     color: #ffffff !important;
     text-transform: uppercase !important;
-    border-radius: 24px !important;
+    border-radius: unset !important;
 }
 
 .btn-success{

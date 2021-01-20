@@ -105,10 +105,6 @@
 .detractors-dot{
   background-color: #e3002a !important;
 }
-  
-.response-card{
-  margin: 5% 0% 2% 0% !important;
-}
 
 .custom-pagination /deep/ .ngx-pagination .current {
     background: #43b02a !important;

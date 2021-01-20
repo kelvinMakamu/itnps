@@ -24,5 +24,9 @@ export class UsersService {
     });
     return this.fullname;
   }
+
+  getUserAssignedAgents(userId: any): Observable<any>{
+    return this.httpClient.get<any>(`${environment.API_URL}/users/${userId}/agents`);
+  }
   
 }

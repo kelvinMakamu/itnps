@@ -422,7 +422,70 @@ const getUserDashboardStats   = async (userID,medium,startDate,endDate) => {
     }
 };
 
+const getUserPeriodicRawResponses = async (userID,medium,startDate,endDate) => {
+    const logged = await getLoggedUserDetails(userID);
+    if(logged !== 1005){
+        const user = await User.findOne({ _id: userID });
+        let condition;
+        if(user){
+            switch(parseInt(user.level)){
+                case 0:
+                condition = {
+                    createdAt: {
+                        $gte: new Date(new Date(startDate).setHours(00, 00, 00)),
+                        $lt: new Date(new Date(endDate).setHours(23, 59, 59))
+                    }
+                };
+                break;
+        
+                case 1:
+                const managers = await Manager.find({ manager_id: userID},'agent_id');
+                let agents     = managers.map((manage) => {return manage.agent_id});
+                if(agents){
+                    condition = {
+                        createdAt: {
+                            $gte: new Date(new Date(startDate).setHours(00, 00, 00)),
+                            $lt: new Date(new Date(endDate).setHours(23, 59, 59))
+                        },
+                        agent_id: { $in: [ userID, ...agents ] },
+                    };
+                }else{
+                    condition = {
+                        createdAt: {
+                            $gte: new Date(new Date(startDate).setHours(00, 00, 00)),
+                            $lt: new Date(new Date(endDate).setHours(23, 59, 59))
+                        },
+                        agent_id : userID
+                    };
+                }
+                break;
+        
+                case 2:
+                condition = {
+                    createdAt: {
+                        $gte: new Date(new Date(startDate).setHours(00, 00, 00)),
+                        $lt: new Date(new Date(endDate).setHours(23, 59, 59))
+                    },
+                    agent_id : userID
+                };
+                break;
+            }
+            const responses = await Response.find(condition).populate('agent_id',"first_name last_name");
+            if(responses){
+                return responses;
+            }else{
+                return 1005;
+            }
+        }else{
+            return 1005;
+        }
+    }else{
+        return 1005;
+    }
+};
+
 module.exports = {
     getUserRawResponses,
-    getUserDashboardStats
+    getUserDashboardStats,
+    getUserPeriodicRawResponses
 }
