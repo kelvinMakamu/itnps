@@ -14,7 +14,6 @@ import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { SideBarComponent } from './side-bar/side-bar.component';
 import { ReportsComponent } from './reports/reports.component';
 import { ResponsesComponent } from './responses/responses.component';
-import { HelpComponent } from './help/help.component';
 import { JwtInterceptor } from './helpers/jwt.interceptor';
 import { ErrorInterceptor } from './helpers/error.interceptor';
 import { FilterFormComponent } from './filter-form/filter-form.component';
@@ -30,7 +29,6 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     SideBarComponent,
     ReportsComponent,
     ResponsesComponent,
-    HelpComponent,
     FilterFormComponent
   ],
   imports: [
