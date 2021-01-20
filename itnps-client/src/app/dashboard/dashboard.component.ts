@@ -6,6 +6,7 @@ import { TokenStorageService } from '../services/token-storage.service';
 import { Filter } from '../models/filter';
 
 import { environment } from 'src/environments/environment';
+import { UsersService } from '../services/users.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -15,10 +16,11 @@ import { environment } from 'src/environments/environment';
 
 export class DashboardComponent implements OnInit {
   userId: any;
+  agents: any;
   startDate: any;
   endDate: any;
   dashboardStats: any;
-  searchModel: any = new Filter('','');
+  searchModel: any = new Filter(0,'','');
   /* Trends Data Arrays */
   monthData: any;
   npsData: any;
@@ -31,6 +33,7 @@ export class DashboardComponent implements OnInit {
   lineChartType: string;
 
   constructor(
+    private userService: UsersService,
     private dashboardService: DashboardService,
     private tokenStorageService: TokenStorageService
   ){}
@@ -61,6 +64,9 @@ export class DashboardComponent implements OnInit {
   }
   
   ngOnInit() {
+    this.userService.getUserAssignedAgents(this.tokenStorageService.getUser().id).subscribe((data)=>{
+      this.agents = data.body;
+    });
     this.filterDashboardStats(this.searchModel);
   }
 }

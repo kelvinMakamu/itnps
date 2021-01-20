@@ -9,9 +9,8 @@
         <!--- START CONTENT HERE -->
           <div class="col-md-10 col-lg-10 col-sm-12">
             <div class="search-controls card">
-              <app-filter-form (filterDashboard)='filterDashboardStats($event)'></app-filter-form>
+              <app-filter-form [agents]='agents' (filterDashboard)='filterDashboardStats($event)'></app-filter-form>
             </div>
-  
           <div class="stat-panes">
             <div class="row">
               <div class="col-md-3 col-lg-3 col-sm-12">

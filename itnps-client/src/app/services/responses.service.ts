@@ -13,5 +13,10 @@ export class ResponsesService {
 
   getRawResponses(userId: any): Observable<any>{
     return this.http.post(`${environment.API_URL}responses/users`,{ userId });
-  }
+  };
+  
+  getRawResponsesBetweenDuration(userId: any, startDate: any, endDate:any ): Observable<any>{
+    return this.http.post<any>(`${environment.API_URL}responses/users/period`,{userId,startDate,endDate});
+  };
+
 }

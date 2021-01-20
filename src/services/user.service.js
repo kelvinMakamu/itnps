@@ -93,9 +93,18 @@ const getManagerAgents = async (managerID) => {
                     _id: { $in: agents },
                 };
                 
-                const users  = await User.find(condition,CONFIG.COLS_USER);
-                if(users){
-                    return users;
+                const assigned  = await User.find(condition,CONFIG.COLS_USER);
+                if(assigned){
+                    return assigned;
+                }else{
+                    return 1009;
+                }
+                break;
+
+                case 2:
+                const current  = await User.findOne({ _id: managerID },CONFIG.COLS_USER);
+                if(current){
+                    return current;
                 }else{
                     return 1009;
                 }

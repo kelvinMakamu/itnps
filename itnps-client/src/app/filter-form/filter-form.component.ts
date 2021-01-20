@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { Filter } from '../models/filter';
 
 @Component({
@@ -7,14 +7,17 @@ import { Filter } from '../models/filter';
   styleUrls: ['./filter-form.component.css']
 })
 export class FilterFormComponent implements OnInit {
-  
+
+  @Input() agents: any;
+
   readonly DELIMITER = '-';
   
-  model = new Filter('','');
+  model = new Filter(0,'','');
 
   @Output() filterDashboard = new EventEmitter<any>();
 
   filterDashboardData(){
+    this.model.agentID   = this.model.agentID;
     this.model.startDate = this.formatSelectedDate(this.model.startDate);
     this.model.endDate   = this.formatSelectedDate(this.model.endDate);
     this.filterDashboard.emit(this.model);
