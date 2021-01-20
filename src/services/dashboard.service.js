@@ -371,57 +371,25 @@ const getTotalResponses  = async (userID,medium,startDate,endDate) => {
 }
 
 const getUserMonthlyTNPSTrend = async (userID,medium,startDate,endDate) => {
+    const startingDate = new Date(startDate);
+    const endingDate   = new Date(endDate);
+    const trend = [];
 
-    const promoters        = await getPromoters(userID,medium,startDate,endDate);
-    const percentPromoter  = promoters.percent;
-    const detractors       = await getDetractors(userID,medium,startDate,endDate);
-    const percentDetractor = detractors.percent;
-    const percentNPS       = percentPromoter - percentDetractor;
+    for(var determineDate = startingDate; determineDate<=endingDate; determineDate.setDate(determineDate.getDate()+1)){
 
-    const trend = [
-      {
-        "NPSMonth": "Jan 2020",
-        "NPSScore": percentNPS,
-        "promoters": percentPromoter,
-        "detractors": percentDetractor
-      },
-      {
-        "NPSMonth": "Feb 2020",
-        "NPSScore": percentNPS,
-        "promoters": percentPromoter,
-        "detractors": percentDetractor
-      },
-      {
-        "NPSMonth": "Mar 2020",
-        "NPSScore": percentNPS,
-        "promoters": percentPromoter,
-        "detractors": percentDetractor
-      },
-      {
-        "NPSMonth": "Apr 2020",
-        "NPSScore": percentNPS,
-        "promoters": percentPromoter,
-        "detractors": percentDetractor
-      },
-      {
-        "NPSMonth": "May 2020",
-        "NPSScore": percentNPS,
-        "promoters": percentPromoter,
-        "detractors": percentDetractor
-      },
-      {
-        "NPSMonth": "June 2020",
-        "NPSScore": percentNPS,
-        "promoters": percentPromoter,
-        "detractors": percentDetractor
-      },
-      {
-        "NPSMonth": "July 2020",
-        "NPSScore": percentNPS,
-        "promoters": percentPromoter,
-        "detractors": percentDetractor
-      }
-    ];
+        const promoters        = await getPromoters(userID,medium,determineDate,determineDate);
+        const percentPromoter  = promoters.percent;
+        const detractors       = await getDetractors(userID,medium,determineDate,determineDate);
+        const percentDetractor = detractors.percent;
+        const percentNPS       = percentPromoter - percentDetractor;
+        const trendDetails     = {
+            "NPSMonth"  : new Date(Date.parse(determineDate)),
+            "NPSScore"  : percentNPS,
+            "promoters" : percentPromoter,
+            "detractors": percentDetractor
+        };
+        trend.push(trendDetails);
+    }
     return trend;
 };
 
