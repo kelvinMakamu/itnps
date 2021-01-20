@@ -11,7 +11,7 @@
 .auth-card{
     width: 100%;
     height: auto;
-    border-radius: 10px;
+    border-radius: unset !important;
     border: solid 1px #707070;
     background-color: #ffffff;
 }
