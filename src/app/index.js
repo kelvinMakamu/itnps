@@ -1,11 +1,11 @@
-const express    = require("express");
+const express = require("express");
 const bodyParser = require("body-parser");
-const morgan     = require("morgan");
-const helmet     = require("helmet");
-const cors       = require("cors");
-const CONFIG     = require("../configs/config");
-const CONNECT    = require("../models/connect");
-const router     = require("../routes/app.routes");
+const morgan = require("morgan");
+const helmet = require("helmet");
+const cors = require("cors");
+const CONFIG = require("../configs/config");
+const CONNECT = require("../models/connect");
+const router = require("../routes/app.routes");
 
 const middlewares = [
   helmet(),

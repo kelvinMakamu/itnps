@@ -17,6 +17,7 @@ services:
     environment: 
       NODE_ENV: "staging"
       PORT: 8185
+      MONGODB_URI: "mongodb://localhost:27017/itnps"
     links:
       - mongo
 
@@ -26,4 +27,4 @@ services:
     volumes:
       - ./src/models:/app/src/models
     ports:
-      - "27017:27017"
+      - 27017:27017
