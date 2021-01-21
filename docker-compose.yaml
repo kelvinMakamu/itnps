@@ -1,0 +1,29 @@
+version: '3.3' # Requires Docker engine 18.02.0+\
+
+services:
+  itnps:
+    container_name: app
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:   # Binds volume to enable working through docker locally
+      - type: bind
+        source: .
+        target: /app
+    ports:
+      - 8185:8185
+    # attach terminal
+    tty: true
+    environment: 
+      NODE_ENV: "staging"
+      PORT: 8185
+    links:
+      - mongo
+
+  mongo:
+    container_name: mongo
+    image: mongo
+    volumes:
+      - ./src/models:/app/src/models
+    ports:
+      - "27017:27017"
